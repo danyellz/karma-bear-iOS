@@ -50,12 +50,13 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
         
         if ((error) != nil)
         {
-            // Process error
+            print(error)
         }
         else if result.isCancelled {
             // Handle cancellations
         }
         else {
+            print("Setup Navigation to View")
             // If you ask for multiple permissions at once, you
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
@@ -68,40 +69,42 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
                         return
                     }
                     
-                    let result = result as! [String: AnyObject]
+                    let result = result as! [String:AnyObject]
                     
-                        let userId = result["id"] as! String
-                        let accessToken = FBSDKAccessToken.current().tokenString
-                        let httpRequest = self.httpHelper.buildRequest(path: "auth/verify", method: "POST")
+                    let userId = result["id"] as! String
+                    print(userId)
+                    let accessToken = FBSDKAccessToken.current().tokenString
+                    
+                    let httpRequest = self.httpHelper.buildRequest(path: "auth/verify", method: "POST")
+                    
+                    httpRequest.httpBody = "{\"id\":\"\(userId)\",\"access_token\":\"\(accessToken)\"}".data(using: String.Encoding.utf8)
+                    print(httpRequest.httpBody)
+                    
+                    self.httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
                         
-                        httpRequest.httpBody = "{\"id\":\"\(userId)\",\"access_token\":\"\(accessToken)\"}".data(using: String.Encoding.utf8)
-                        
-                        self.httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
+                        guard error == nil else {
+                            print(error)
+                            return
+                        }
+                        do
+                        {
+                            print(data as! Data)
+                            let responseDict = try JSONSerialization.jsonObject(with: data as! Data, options: JSONSerialization.ReadingOptions.allowFragments)
+                            print(responseDict)
                             
-                            guard error == nil else {
-                                print(error)
-                                return
-                            }
-                            do
-                            {
-                                print(data!)
-                                let responseDict = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments)
-                                
-                                UserDefaults.standard.setValue("\(responseDict)", forKey: "FBToken")
-                                UserDefaults.standard.synchronize()
-                                
-                                let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
-                                print(currentUserToken)
-                                
-                            } catch let error as NSError {
-                                print(error)
-                            }
-                        } as! (NSData?, NSError?) -> Void)
+                            UserDefaults.standard.setValue("\(responseDict)", forKey: "FBToken")
+                            UserDefaults.standard.synchronize()
+                            
+                            let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
+                            print(currentUserToken)
+                            
+                        } catch let error as NSError {
+                            print(error)
+                        }
+                    })
                 }
                 
-                print("Success! Dimissing VC!")
-                
-                dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -110,4 +113,6 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
         print("User Logged Out")
     }
 }
+
+
 

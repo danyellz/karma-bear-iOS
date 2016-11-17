@@ -10,25 +10,21 @@ import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
 
+import UIKit
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  
-  var window: UIWindow?
     
-    private func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+    var window: UIWindow?
+    
+    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool
+    {
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    private func application(application: UIApplication,
-                     openURL url: URL,
-                             sourceApplication: String?,
-                             annotation: AnyObject?) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(
-            application,
-            open: url as URL!,
-            sourceApplication: sourceApplication,
-            annotation: annotation)
+    public func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool
+    {
+        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
     }
 }
 

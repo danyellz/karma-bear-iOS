@@ -24,7 +24,7 @@
         <!--KarmaBear Profile-->
         <scene sceneID="kYB-9k-ZFU">
             <objects>
-                <viewController id="Xw6-tr-JNE" customClass="UserActivityViewController" customModule="Selfie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Xw6-tr-JNE" customClass="UserActivityViewController" customModule="KarmaBear" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gqN-6q-tp0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -108,7 +108,7 @@
         <!--View Controller-->
         <scene sceneID="EnH-nf-a5X">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="U9W-ci-KuP" customClass="ViewController" customModule="Selfie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="U9W-ci-KuP" customClass="ViewController" customModule="KarmaBear" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eDj-rF-m1r">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -120,7 +120,7 @@
                                     <outlet property="delegate" destination="U9W-ci-KuP" id="sxy-Hu-buo"/>
                                 </connections>
                             </mapView>
-                            <tableView clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="fSn-Ug-YLu" customClass="CharityLocTableView" customModule="Selfie" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="fSn-Ug-YLu" customClass="CharityLocTableView" customModule="KarmaBear" customModuleProvider="target">
                                 <frame key="frameInset" minY="479" width="319" height="216"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -229,7 +229,7 @@
         <!--Need Modal View Controller-->
         <scene sceneID="VJt-55-5XZ">
             <objects>
-                <viewController id="3WD-Tj-H0k" customClass="NeedModalViewController" customModule="Selfie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3WD-Tj-H0k" customClass="NeedModalViewController" customModule="KarmaBear" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="y0X-r8-6i4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -319,7 +319,7 @@
         <!--Event Modal View Controller-->
         <scene sceneID="KQ0-a1-5DX">
             <objects>
-                <viewController id="dwf-6x-VnN" customClass="EventModalViewController" customModule="Selfie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dwf-6x-VnN" customClass="EventModalViewController" customModule="KarmaBear" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="yEQ-kn-aHi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -415,7 +415,7 @@
         <!--Charity Detail View Controller-->
         <scene sceneID="wzv-72-Hdt">
             <objects>
-                <viewController id="j1u-Xv-Mln" customClass="CharityDetailViewController" customModule="Selfie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="j1u-Xv-Mln" customClass="CharityDetailViewController" customModule="KarmaBear" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wyj-Zy-ap2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -505,13 +505,13 @@
         <!--Authenticate View Controller-->
         <scene sceneID="1bn-UM-Em7">
             <objects>
-                <viewController storyboardIdentifier="AuthenticateViewController" id="EU2-W0-vfq" customClass="AuthenticateViewController" customModule="Selfie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthenticateViewController" id="EU2-W0-vfq" customClass="AuthenticateViewController" customModule="KarmaBear" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0WG-53-Wfh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Launch" id="EGF-Qm-qES">
-                                <frame key="frameInset" minX="56" minY="30" width="200" height="200"/>
+                                <frame key="frameInset" minX="87" minY="55" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>

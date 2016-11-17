@@ -53,8 +53,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     self.cllocationManager.requestAlwaysAuthorization()
     self.cllocationManager.requestWhenInUseAuthorization()
     
-    let userLocation = mapView.userLocation
-    
     cllocationManager.startUpdatingLocation()
     mapView.showsUserLocation = true
     mapView.delegate = self
@@ -63,10 +61,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     userNavBtn.setImage(userImg, for: .normal)
     
     if UserDefaults.standard.string(forKey: "FBToken") == nil {
+        print("No registered token")
         performSegue(withIdentifier: "authFailure", sender: self)
     }
     
     if UserDefaults.standard.string(forKey: "FBToken") != nil {
+        print("Token registered")
         
         let activityView = UIView.init(frame: view.frame)
         activityView.backgroundColor = UIColor.gray
@@ -132,6 +132,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
             let userToken = currentUserToken! as String
+            print(userToken)
             
             let httpRequest = httpHelper.buildRequest(path: "auth/giver", method: "POST")
             httpRequest.httpBody = "{\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
@@ -149,6 +150,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     }
                     
                     let responseDict = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments)
+                    print(responseDict)
                     
                     if let responseDict = responseDict as? [String:AnyObject] {
                     

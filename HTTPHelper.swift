@@ -18,15 +18,17 @@ enum HTTPRequestContentType {
     case HTTPJsonContent
     case HTTPMultipartContent
 }
-
 struct HTTPHelper {
     static let BASE_URL = "http://karmabear.herokuapp.com/api"
     
     func buildRequest(path: String!, method: String,
                       requestContentType: HTTPRequestContentType = HTTPRequestContentType.HTTPJsonContent, requestBoundary:String = "") -> NSMutableURLRequest {
         // 1. Create the request URL from path
-        let requestURL = URL(string: "\(HTTPHelper.BASE_URL)/\(path)")
-        let request = NSMutableURLRequest(url: requestURL!)
+        
+        let requestURL = NSURL(string: "\(HTTPHelper.BASE_URL)/\(path as! String)")
+        print(requestURL)
+        let request = NSMutableURLRequest(url: requestURL! as URL)
+        print(request)
         
         
         // Set HTTP request method and Content-Type
@@ -41,11 +43,27 @@ struct HTTPHelper {
             request.addValue(contentType, forHTTPHeaderField: "Content-Type")
         }
         
+        //      // 3. Set the correct Authorization header.
+        //      switch authType {
+        //      case .HTTPBasicAuth:
+        //        // Set BASIC authentication header
+        //        let basicAuthString = "\(HTTPHelper.API_AUTH_NAME):\(HTTPHelper.API_AUTH_PASSWORD)"
+        //        let utf8str = basicAuthString.dataUsingEncoding(NSUTF8StringEncoding)
+        //        let base64EncodedString = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        //
+        //        request.addValue("Basic \(base64EncodedString!)", forHTTPHeaderField: "Authorization")
+        //      case .HTTPTokenAuth:
+        //        // Retreieve Auth_Token from Keychain
+        //        if let userToken = KeychainAccess.passwordForAccount("Auth_Token", service: "KeyChainService") as String? {
+        //          // Set Authorization header
+        //          request.addValue("Token token=\(userToken)", forHTTPHeaderField: "Authorization")
+        //        }
+        //    }
+        
         return request
-    }
+    }    
     
-    
-    func sendRequest(request: NSURLRequest, completion: @escaping (NSData?, NSError?) -> Void) -> () {
+    func sendRequest(request: NSURLRequest, completion: @escaping (Data?, Error?) -> Void) -> () {
         // Create a NSURLSession task
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
@@ -62,7 +80,7 @@ struct HTTPHelper {
             do
             {
                 print(data)
-                completion(data as NSData?, nil)
+                completion(data as Data?, nil)
             } catch let parserError as NSError{
                 print(parserError)
             }
