@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10BC4CE91DDD512A00E6F2BD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CE81DDD512A00E6F2BD /* AVFoundation.framework */; };
+		10BC4CEB1DDD513000E6F2BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CEA1DDD513000E6F2BD /* Foundation.framework */; };
+		10BC4CED1DDD518400E6F2BD /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CEC1DDD518400E6F2BD /* Bolts.framework */; };
+		10BC4CEE1DDD518400E6F2BD /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CEC1DDD518400E6F2BD /* Bolts.framework */; };
+		10BC4CF11DDD51BA00E6F2BD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CEF1DDD51BA00E6F2BD /* FBSDKCoreKit.framework */; };
+		10BC4CF21DDD51BA00E6F2BD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CEF1DDD51BA00E6F2BD /* FBSDKCoreKit.framework */; };
+		10BC4CF31DDD51BA00E6F2BD /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CF01DDD51BA00E6F2BD /* FBSDKLoginKit.framework */; };
+		10BC4CF41DDD51BA00E6F2BD /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CF01DDD51BA00E6F2BD /* FBSDKLoginKit.framework */; };
+		10BC4CF61DDD524A00E6F2BD /* BackgroundVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC4CF51DDD524A00E6F2BD /* BackgroundVideo.swift */; };
+		10BC4CF71DDD524A00E6F2BD /* BackgroundVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BC4CF51DDD524A00E6F2BD /* BackgroundVideo.swift */; };
 		10D0F31D1DDD425F00A29AC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F31C1DDD425F00A29AC0 /* AppDelegate.swift */; };
 		10D0F31F1DDD425F00A29AC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F31E1DDD425F00A29AC0 /* ViewController.swift */; };
 		10D0F3221DDD425F00A29AC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10D0F3201DDD425F00A29AC0 /* Main.storyboard */; };
@@ -14,6 +24,21 @@
 		10D0F3271DDD425F00A29AC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10D0F3251DDD425F00A29AC0 /* LaunchScreen.storyboard */; };
 		10D0F3321DDD425F00A29AC0 /* KarmaBearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3311DDD425F00A29AC0 /* KarmaBearTests.swift */; };
 		10D0F33D1DDD425F00A29AC0 /* KarmaBearUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F33C1DDD425F00A29AC0 /* KarmaBearUITests.swift */; };
+		10D0F3511DDD468800A29AC0 /* NeedStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3501DDD468800A29AC0 /* NeedStruct.swift */; };
+		10D0F3531DDD46B200A29AC0 /* EventStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3521DDD46B200A29AC0 /* EventStruct.swift */; };
+		10D0F3551DDD46D300A29AC0 /* CharityStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3541DDD46D300A29AC0 /* CharityStruct.swift */; };
+		10D0F3571DDD46F600A29AC0 /* CharityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3561DDD46F600A29AC0 /* CharityModel.swift */; };
+		10D0F3591DDD470F00A29AC0 /* UserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3581DDD470F00A29AC0 /* UserStruct.swift */; };
+		10D0F35C1DDD475700A29AC0 /* NeedModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F35B1DDD475700A29AC0 /* NeedModalViewController.swift */; };
+		10D0F35E1DDD477900A29AC0 /* EventModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F35D1DDD477900A29AC0 /* EventModalViewController.swift */; };
+		10D0F3611DDD47C400A29AC0 /* CharityAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3601DDD47C400A29AC0 /* CharityAnnotation.swift */; };
+		10D0F3631DDD47DF00A29AC0 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3621DDD47DF00A29AC0 /* AnnotationView.swift */; };
+		10D0F3651DDD47FD00A29AC0 /* CharityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3641DDD47FD00A29AC0 /* CharityDetailViewController.swift */; };
+		10D0F3671DDD482A00A29AC0 /* CharityLocTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3661DDD482A00A29AC0 /* CharityLocTableView.swift */; };
+		10D0F3691DDD484600A29AC0 /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F3681DDD484600A29AC0 /* CustomCalloutView.swift */; };
+		10D0F36B1DDD486300A29AC0 /* UserActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F36A1DDD486300A29AC0 /* UserActivityViewController.swift */; };
+		10D0F36E1DDD48B100A29AC0 /* AuthenticateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F36D1DDD48B100A29AC0 /* AuthenticateViewController.swift */; };
+		10D0F3701DDD48D100A29AC0 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F36F1DDD48D100A29AC0 /* HTTPHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +59,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10BC4CDD1DDD501900E6F2BD /* KarmaBearTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KarmaBearTests-Bridging-Header.h"; path = "KarmaBearTests/KarmaBearTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		10BC4CE81DDD512A00E6F2BD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		10BC4CEA1DDD513000E6F2BD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		10BC4CEC1DDD518400E6F2BD /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = KarmaBear/Bolts.framework; sourceTree = "<group>"; };
+		10BC4CEF1DDD51BA00E6F2BD /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = KarmaBear/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		10BC4CF01DDD51BA00E6F2BD /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = KarmaBear/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		10BC4CF51DDD524A00E6F2BD /* BackgroundVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundVideo.swift; path = KarmaBear/BackgroundVideo.swift; sourceTree = "<group>"; };
 		10D0F3191DDD425F00A29AC0 /* KarmaBear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KarmaBear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D0F31C1DDD425F00A29AC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		10D0F31E1DDD425F00A29AC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		10D0F31E1DDD425F00A29AC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = KarmaBear/ViewController.swift; sourceTree = "<group>"; };
 		10D0F3211DDD425F00A29AC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		10D0F3231DDD425F00A29AC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10D0F3261DDD425F00A29AC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +79,21 @@
 		10D0F3381DDD425F00A29AC0 /* KarmaBearUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KarmaBearUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D0F33C1DDD425F00A29AC0 /* KarmaBearUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KarmaBearUITests.swift; sourceTree = "<group>"; };
 		10D0F33E1DDD425F00A29AC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10D0F3501DDD468800A29AC0 /* NeedStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeedStruct.swift; sourceTree = "<group>"; };
+		10D0F3521DDD46B200A29AC0 /* EventStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStruct.swift; sourceTree = "<group>"; };
+		10D0F3541DDD46D300A29AC0 /* CharityStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharityStruct.swift; sourceTree = "<group>"; };
+		10D0F3561DDD46F600A29AC0 /* CharityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharityModel.swift; sourceTree = "<group>"; };
+		10D0F3581DDD470F00A29AC0 /* UserStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStruct.swift; sourceTree = "<group>"; };
+		10D0F35B1DDD475700A29AC0 /* NeedModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeedModalViewController.swift; sourceTree = "<group>"; };
+		10D0F35D1DDD477900A29AC0 /* EventModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventModalViewController.swift; sourceTree = "<group>"; };
+		10D0F3601DDD47C400A29AC0 /* CharityAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharityAnnotation.swift; sourceTree = "<group>"; };
+		10D0F3621DDD47DF00A29AC0 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		10D0F3641DDD47FD00A29AC0 /* CharityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharityDetailViewController.swift; sourceTree = "<group>"; };
+		10D0F3661DDD482A00A29AC0 /* CharityLocTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharityLocTableView.swift; sourceTree = "<group>"; };
+		10D0F3681DDD484600A29AC0 /* CustomCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCalloutView.swift; sourceTree = "<group>"; };
+		10D0F36A1DDD486300A29AC0 /* UserActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActivityViewController.swift; sourceTree = "<group>"; };
+		10D0F36D1DDD48B100A29AC0 /* AuthenticateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticateViewController.swift; sourceTree = "<group>"; };
+		10D0F36F1DDD48D100A29AC0 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +101,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10BC4CED1DDD518400E6F2BD /* Bolts.framework in Frameworks */,
+				10BC4CF11DDD51BA00E6F2BD /* FBSDKCoreKit.framework in Frameworks */,
+				10BC4CF31DDD51BA00E6F2BD /* FBSDKLoginKit.framework in Frameworks */,
+				10BC4CEB1DDD513000E6F2BD /* Foundation.framework in Frameworks */,
+				10BC4CE91DDD512A00E6F2BD /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +113,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10BC4CEE1DDD518400E6F2BD /* Bolts.framework in Frameworks */,
+				10BC4CF21DDD51BA00E6F2BD /* FBSDKCoreKit.framework in Frameworks */,
+				10BC4CF41DDD51BA00E6F2BD /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,9 +129,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10BC4CE11DDD505C00E6F2BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10BC4CEF1DDD51BA00E6F2BD /* FBSDKCoreKit.framework */,
+				10BC4CF01DDD51BA00E6F2BD /* FBSDKLoginKit.framework */,
+				10BC4CEC1DDD518400E6F2BD /* Bolts.framework */,
+				10BC4CEA1DDD513000E6F2BD /* Foundation.framework */,
+				10BC4CE81DDD512A00E6F2BD /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		10D0F3101DDD425F00A29AC0 = {
 			isa = PBXGroup;
 			children = (
+				10BC4CE11DDD505C00E6F2BD /* Frameworks */,
+				10D0F36C1DDD489300A29AC0 /* RequestHelpers */,
+				10D0F35A1DDD473C00A29AC0 /* Views */,
+				10D0F34F1DDD464300A29AC0 /* Models */,
+				10D0F35F1DDD47AB00A29AC0 /* Custom */,
 				10D0F31B1DDD425F00A29AC0 /* KarmaBear */,
 				10D0F3301DDD425F00A29AC0 /* KarmaBearTests */,
 				10D0F33B1DDD425F00A29AC0 /* KarmaBearUITests */,
@@ -98,11 +170,11 @@
 			isa = PBXGroup;
 			children = (
 				10D0F31C1DDD425F00A29AC0 /* AppDelegate.swift */,
-				10D0F31E1DDD425F00A29AC0 /* ViewController.swift */,
 				10D0F3201DDD425F00A29AC0 /* Main.storyboard */,
 				10D0F3231DDD425F00A29AC0 /* Assets.xcassets */,
 				10D0F3251DDD425F00A29AC0 /* LaunchScreen.storyboard */,
 				10D0F3281DDD425F00A29AC0 /* Info.plist */,
+				10BC4CDD1DDD501900E6F2BD /* KarmaBearTests-Bridging-Header.h */,
 			);
 			path = KarmaBear;
 			sourceTree = "<group>";
@@ -123,6 +195,51 @@
 				10D0F33E1DDD425F00A29AC0 /* Info.plist */,
 			);
 			path = KarmaBearUITests;
+			sourceTree = "<group>";
+		};
+		10D0F34F1DDD464300A29AC0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				10D0F3501DDD468800A29AC0 /* NeedStruct.swift */,
+				10D0F3521DDD46B200A29AC0 /* EventStruct.swift */,
+				10D0F3541DDD46D300A29AC0 /* CharityStruct.swift */,
+				10D0F3561DDD46F600A29AC0 /* CharityModel.swift */,
+				10D0F3581DDD470F00A29AC0 /* UserStruct.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		10D0F35A1DDD473C00A29AC0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				10D0F31E1DDD425F00A29AC0 /* ViewController.swift */,
+				10D0F35B1DDD475700A29AC0 /* NeedModalViewController.swift */,
+				10D0F35D1DDD477900A29AC0 /* EventModalViewController.swift */,
+				10D0F3641DDD47FD00A29AC0 /* CharityDetailViewController.swift */,
+				10D0F36A1DDD486300A29AC0 /* UserActivityViewController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		10D0F35F1DDD47AB00A29AC0 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				10BC4CF51DDD524A00E6F2BD /* BackgroundVideo.swift */,
+				10D0F3601DDD47C400A29AC0 /* CharityAnnotation.swift */,
+				10D0F3621DDD47DF00A29AC0 /* AnnotationView.swift */,
+				10D0F3661DDD482A00A29AC0 /* CharityLocTableView.swift */,
+				10D0F3681DDD484600A29AC0 /* CustomCalloutView.swift */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		10D0F36C1DDD489300A29AC0 /* RequestHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				10D0F36D1DDD48B100A29AC0 /* AuthenticateViewController.swift */,
+				10D0F36F1DDD48D100A29AC0 /* HTTPHelper.swift */,
+			);
+			name = RequestHelpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +316,7 @@
 					10D0F32C1DDD425F00A29AC0 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 792PPDCQ8E;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 10D0F3181DDD425F00A29AC0;
 					};
@@ -262,8 +380,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10D0F35C1DDD475700A29AC0 /* NeedModalViewController.swift in Sources */,
 				10D0F31F1DDD425F00A29AC0 /* ViewController.swift in Sources */,
+				10D0F3701DDD48D100A29AC0 /* HTTPHelper.swift in Sources */,
+				10D0F36E1DDD48B100A29AC0 /* AuthenticateViewController.swift in Sources */,
+				10D0F3691DDD484600A29AC0 /* CustomCalloutView.swift in Sources */,
 				10D0F31D1DDD425F00A29AC0 /* AppDelegate.swift in Sources */,
+				10D0F3571DDD46F600A29AC0 /* CharityModel.swift in Sources */,
+				10BC4CF61DDD524A00E6F2BD /* BackgroundVideo.swift in Sources */,
+				10D0F3511DDD468800A29AC0 /* NeedStruct.swift in Sources */,
+				10D0F3631DDD47DF00A29AC0 /* AnnotationView.swift in Sources */,
+				10D0F3591DDD470F00A29AC0 /* UserStruct.swift in Sources */,
+				10D0F36B1DDD486300A29AC0 /* UserActivityViewController.swift in Sources */,
+				10D0F35E1DDD477900A29AC0 /* EventModalViewController.swift in Sources */,
+				10D0F3611DDD47C400A29AC0 /* CharityAnnotation.swift in Sources */,
+				10D0F3551DDD46D300A29AC0 /* CharityStruct.swift in Sources */,
+				10D0F3651DDD47FD00A29AC0 /* CharityDetailViewController.swift in Sources */,
+				10D0F3531DDD46B200A29AC0 /* EventStruct.swift in Sources */,
+				10D0F3671DDD482A00A29AC0 /* CharityLocTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10D0F3321DDD425F00A29AC0 /* KarmaBearTests.swift in Sources */,
+				10BC4CF71DDD524A00E6F2BD /* BackgroundVideo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +549,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 792PPDCQ8E;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KarmaBear",
+				);
 				INFOPLIST_FILE = KarmaBear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KarmaBear;
@@ -427,6 +566,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 792PPDCQ8E;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KarmaBear",
+				);
 				INFOPLIST_FILE = KarmaBear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KarmaBear;
@@ -440,11 +583,18 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 792PPDCQ8E;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KarmaBear",
+				);
 				INFOPLIST_FILE = KarmaBearTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KarmaBearTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KarmaBearTests/KarmaBearTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KarmaBear.app/KarmaBear";
 			};
@@ -455,11 +605,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 792PPDCQ8E;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KarmaBear",
+				);
 				INFOPLIST_FILE = KarmaBearTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KarmaBearTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KarmaBearTests/KarmaBearTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KarmaBear.app/KarmaBear";
 			};
@@ -512,6 +668,7 @@
 				10D0F3431DDD425F00A29AC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		10D0F3441DDD425F00A29AC0 /* Build configuration list for PBXNativeTarget "KarmaBearTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +677,7 @@
 				10D0F3461DDD425F00A29AC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		10D0F3471DDD425F00A29AC0 /* Build configuration list for PBXNativeTarget "KarmaBearUITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +686,7 @@
 				10D0F3491DDD425F00A29AC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
