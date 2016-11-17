@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class EventModalViewController: UIViewController {
     @IBOutlet weak var modalView: UIView!
@@ -26,11 +27,11 @@ class EventModalViewController: UIViewController {
         
         modalView.layer.cornerRadius = 10
         
-        let blurEffect = UIBlurEffect(style: .Dark)
+        let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.view.frame
         
-        self.view.insertSubview(blurEffectView, atIndex: 0)
+        self.view.insertSubview(blurEffectView, at: 0)
         
         setupView()
     }
@@ -40,28 +41,28 @@ class EventModalViewController: UIViewController {
         startLabel.text = eventStart
         endLabel.text = eventEnd
         
-        descriptionText.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        descriptionText.lineBreakMode = NSLineBreakMode.byWordWrapping
         descriptionText.numberOfLines = 0
     }
     
     @IBAction func dismissModal(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func registerToThisEvent(sender: AnyObject) {
-        registerForEvent(eventId)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        registerForEvent(eventId: eventId)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func registerForEvent(eventId: Int) {
         
-        let httpRequest = httpHelper.buildRequest("auth/register", method: "POST")
-        let currentUserToken = NSUserDefaults.standardUserDefaults().stringForKey("FBToken")
+        let httpRequest = httpHelper.buildRequest(path: "auth/register", method: "POST")
+        let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
         let userToken = currentUserToken! as String
         
-        httpRequest.HTTPBody = "{\"id\":\"\(eventId)\",\"token\":\"\(userToken)\"}".dataUsingEncoding(NSUTF8StringEncoding)
+        httpRequest.httpBody = "{\"id\":\"\(eventId)\",\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
         
-        httpHelper.sendRequest(httpRequest, completion: {(data: NSData!, error: NSError!) in
+        httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
             
             guard error == nil else {
                 print(error)
@@ -74,7 +75,7 @@ class EventModalViewController: UIViewController {
             } catch let error as NSError {
                 print(error)
             }
-        })
+        } as! (NSData?, NSError?) -> Void)
     }
     
 }

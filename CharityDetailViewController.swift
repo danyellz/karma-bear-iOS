@@ -46,16 +46,16 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         needsTableView.dataSource = self
         needsTableView.delegate = self
-        needsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "needsCell")
-        needsTableView.backgroundColor = UIColor.clearColor()
+        needsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "needsCell")
+        needsTableView.backgroundColor = UIColor.clear
         
         eventsTableView.dataSource = self
         eventsTableView.delegate = self
-        eventsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "eventsCell")
-        eventsTableView.backgroundColor = UIColor.clearColor()
+        eventsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "eventsCell")
+        eventsTableView.backgroundColor = UIColor.clear
         
         
-        descLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        descLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         descLabel.numberOfLines = 0
         
         loadCharityDisplay()
@@ -68,7 +68,7 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func closeDetailView(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -83,20 +83,20 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
             let url = NSURL(string: self.imageUrl!)
             print(url)
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async {
                 
-                let thisData = NSData(contentsOfURL: url!)
-                self.mainImageView.image = UIImage(data: thisData!)
-            })
+                let thisData = NSData(contentsOf: url! as URL)
+                self.mainImageView.image = UIImage(data: thisData! as Data)
+            }
         }
         else{
             let url = NSURL(string: "https://s-media-cache-ak0.pinimg.com/originals/37/30/41/37304117db4d017b4ef48d309b046b62.png")
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async {
                 
-                let thisData = NSData(contentsOfURL: url!)
-                self.mainImageView.image = UIImage(data: thisData!)
-            })
+                let thisData = NSData(contentsOf: url! as URL)
+                self.mainImageView.image = UIImage(data: thisData! as Data)
+            }
         }
         
         descLabel.text = descString
@@ -107,39 +107,43 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         let currentCharity = (CharityModel.charityData[passedId!])
         print(passedId)
         
-        let httpRequest = httpHelper.buildRequest("auth/charity", method: "POST")
-        let currentUserToken = NSUserDefaults.standardUserDefaults().stringForKey("FBToken")
+        let httpRequest = httpHelper.buildRequest(path: "auth/charity", method: "POST")
+        let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
         let userToken = currentUserToken! as String
         print(userToken)
         
-        httpRequest.HTTPBody = "{\"id\":\"\(currentCharity.id)\",\"token\":\"\(userToken)\"}".dataUsingEncoding(NSUTF8StringEncoding)
+        httpRequest.httpBody = "{\"id\":\"\(currentCharity.id)\",\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
         
-        httpHelper.sendRequest(httpRequest, completion: {(data: NSData!, error: NSError!) in
+        httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
             
             guard error == nil else {
                 print(error)
                 return
             }
             do {
-                let responseDict = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
                 
-                let needArr = responseDict["needs"] as? NSArray
-                let eventArr = responseDict["events"] as? NSArray
+                let responseDict = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments)
                 
-                print(needArr)
+                if let responseDict = responseDict as? [String:AnyObject] {
                 
-                self.loadTableData(needArr, events: eventArr)
+                    let needArr = responseDict["needs"] as? NSArray
+                    let eventArr = responseDict["events"] as? NSArray
+                    
+                    print(needArr)
+                    
+                    self.loadTableData(needs: needArr, events: eventArr)
+                }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async {
                     self.needsTableView.reloadData()
                     self.eventsTableView.reloadData()
-                })
+                }
                 
             } catch let error as NSError {
                 print(error)
             }
             
-        })
+        } as! (NSData?, NSError?) -> Void)
         
     }
     
@@ -168,32 +172,32 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     func followCharity() {
         let currentCharity = (CharityModel.charityData[passedId!])
         
-        let httpRequest = httpHelper.buildRequest("auth/follow", method: "POST")
-        let currentUserToken = NSUserDefaults.standardUserDefaults().stringForKey("FBToken")
+        let httpRequest = httpHelper.buildRequest(path: "auth/follow", method: "POST")
+        let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
         let userToken = currentUserToken! as String
         print(userToken)
         
-        httpRequest.HTTPBody = "{\"id\":\"\(currentCharity.id)\",\"token\":\"\(userToken)\"}".dataUsingEncoding(NSUTF8StringEncoding)
+        httpRequest.httpBody = "{\"id\":\"\(currentCharity.id)\",\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
         
-        httpHelper.sendRequest(httpRequest, completion: {(data: NSData!, error: NSError!) in
+        httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
             
             guard error == nil else {
                 print(error)
                 return
             }
             do {
-                let responseDict = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+                let responseDict = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments)
                 print(responseDict)
                 
             } catch let error as NSError {
                 print(error)
             }
             
-        })
+        } as! (NSData?, NSError?) -> Void)
         
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         var count:Int?
         
@@ -208,18 +212,18 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         return count!
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell:UITableViewCell?
         
         if tableView == self.needsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("needsCell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "needsCell", for: indexPath as IndexPath)
             let needsDetail = needData[indexPath.row]
             cell!.textLabel!.text = needsDetail.name
         }
         
         if tableView == self.eventsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("eventsCell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "eventsCell", for: indexPath as IndexPath)
             let needsDetail = eventData[indexPath.row]
             cell!.textLabel!.text = needsDetail.name
         }
@@ -227,7 +231,7 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.needsTableView {
             let actionForNeed = needData[indexPath.row]
             //            donateToCharity(actionForNeed.id)
@@ -235,7 +239,7 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
             needTitle = actionForNeed.name
             quantityNeed = actionForNeed.quantityNeeded
             needStatus = actionForNeed.status
-            performSegueWithIdentifier("needModal", sender: self)
+            performSegue(withIdentifier: "needModal", sender: self)
         }
         
         if tableView == self.eventsTableView {
@@ -247,11 +251,11 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
             eventStart = actionForEvent.start
             eventEnd = actionForEvent.end
             
-            performSegueWithIdentifier("eventModal", sender: self)
+            performSegue(withIdentifier: "eventModal", sender: self)
         }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if tableView == self.needsTableView {
             title = headersArr[0]
@@ -263,27 +267,28 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         return title
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if (segue.identifier == "needModal") {
-            let viewController = segue.destinationViewController as! NeedModalViewController
+            let viewController = segue.destination as! NeedModalViewController
             viewController.needId = needId
             viewController.needTitle = needTitle
             viewController.quantityNeed = quantityNeed
             viewController.status = needStatus
             
-            viewController.modalPresentationStyle = .OverCurrentContext
+            viewController.modalPresentationStyle = .overCurrentContext
         }
         
         if (segue.identifier == "eventModal") {
-            let viewController = segue.destinationViewController as! EventModalViewController
+            let viewController = segue.destination as! EventModalViewController
             viewController.eventId = eventId
             viewController.eventTitle = eventTitle
             viewController.eventDescription = eventDescription
             viewController.eventStart = eventStart
             viewController.eventEnd = eventEnd
             
-            viewController.modalPresentationStyle = .OverCurrentContext
+            viewController.modalPresentationStyle = .overCurrentContext
         }
         
     }

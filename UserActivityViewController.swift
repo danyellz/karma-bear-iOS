@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource{
     
@@ -25,13 +26,13 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
         
         needsTableView.dataSource = self
         needsTableView.delegate = self
-        needsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "needsCell")
-        needsTableView.backgroundColor = UIColor.clearColor()
+        needsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "needsCell")
+        needsTableView.backgroundColor = UIColor.clear
         
         eventsTableView.dataSource = self
         eventsTableView.delegate = self
-        eventsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "eventsCell")
-        eventsTableView.backgroundColor = UIColor.clearColor()
+        eventsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "eventsCell")
+        eventsTableView.backgroundColor = UIColor.clear
         
         self.userProfile.layer.masksToBounds = true
         userProfile.layer.cornerRadius = 10
@@ -48,11 +49,12 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
     func setUpViews() {
         
         let activityView = UIView.init(frame: view.frame)
-        activityView.backgroundColor = UIColor.grayColor()
+        activityView.backgroundColor = UIColor.gray
+        
         activityView.alpha = 1
         view.addSubview(activityView)
         
-        let activitySpinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        let activitySpinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         activitySpinner.center = view.center
         activitySpinner.startAnimating()
         activityView.addSubview(activitySpinner)
@@ -63,26 +65,26 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
         print(url)
         
         
-        let thisData = NSData(contentsOfURL: url!)
-        let userImg = UIImage(data: thisData!)
+        let thisData = NSData(contentsOf: url! as URL)
+        let userImg = UIImage(data: thisData! as Data)
         
         self.userProfile.image = userImg
         
         self.pointsLabel.text = String(userData.points)
         self.userNameLabel.text = "\(userData.firstName) \(userData.lastName)"
         
-        let blurEffect = UIBlurEffect(style: .Light)
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.headerImage.frame
         
-        self.headerImage.insertSubview(blurEffectView, atIndex: 0)
+        self.headerImage.insertSubview(blurEffectView, at: 0)
         
         activitySpinner.stopAnimating()
         activityView.removeFromSuperview()
         
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         var count:Int?
         
@@ -97,40 +99,41 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
         return count!
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell:UITableViewCell?
         
         if tableView == self.needsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("needsCell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "needsCell", for: indexPath)
             let needsDetail = CharityModel.userNeeds[indexPath.row]
             cell!.textLabel!.text = needsDetail.name
         }
         
         if tableView == self.eventsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("eventsCell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "eventsCell", for: indexPath)
             let needsDetail = CharityModel.userEvents[indexPath.row]
             cell!.textLabel!.text = needsDetail.name
         }
         
-        cell?.backgroundColor = UIColorFromHex(0xF5F5F5)
+        cell?.backgroundColor = UIColorFromHex(rgbValue: 0xF5F5F5)
         
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.needsTableView {
-            let actionForNeed = CharityModel.userNeeds[indexPath.row]
+            _ = CharityModel.userNeeds[indexPath.row]
+            
             //            donateToCharity(actionForNeed.id)
             //            needId = actionForNeed.id
             //            needTitle = actionForNeed.name
             //            quantityNeed = actionForNeed.quantityNeeded
             //            needStatus = actionForNeed.status
-            performSegueWithIdentifier("needModal", sender: self)
+            performSegue(withIdentifier: "needModal", sender: self)
         }
         
         if tableView == self.eventsTableView {
-            let actionForEvent = CharityModel.userEvents[indexPath.row]
+            _ = CharityModel.userEvents[indexPath.row]
             //
             //            eventId = actionForEvent.id
             //            eventTitle = actionForEvent.name
@@ -138,11 +141,11 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
             //            eventStart = actionForEvent.start
             //            eventEnd = actionForEvent.end
             
-            performSegueWithIdentifier("eventModal", sender: self)
+            performSegue(withIdentifier: "eventModal", sender: self)
         }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if tableView == self.needsTableView {
             title = headersArr[0]

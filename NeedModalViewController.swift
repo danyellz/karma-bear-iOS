@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class NeedModalViewController: UIViewController {
     @IBOutlet weak var modalView: UIView!
@@ -26,11 +27,11 @@ class NeedModalViewController: UIViewController {
         
         modalView.layer.cornerRadius = 10
         
-        let blurEffect = UIBlurEffect(style: .Dark)
+        let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.view.frame
         
-        self.view.insertSubview(blurEffectView, atIndex: 0)
+        self.view.insertSubview(blurEffectView, at: 0)
         
         setupView()
     }
@@ -41,24 +42,24 @@ class NeedModalViewController: UIViewController {
     }
     
     @IBAction func dismissModal(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func giveToCharity(sender: AnyObject) {
-        donateToCharity(needId)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        donateToCharity(needId: needId)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func donateToCharity(needId: Int) {
         
-        let httpRequest = httpHelper.buildRequest("auth/donate", method: "POST")
-        let currentUserToken = NSUserDefaults.standardUserDefaults().stringForKey("FBToken")
+        let httpRequest = httpHelper.buildRequest(path: "auth/donate", method: "POST")
+        let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
         let userToken = currentUserToken! as String
         let quantity = quantityInput.text!
         
-        httpRequest.HTTPBody = "{\"id\":\"\(needId)\",\"token\":\"\(userToken)\",\"quantity\":\"\(quantity)\"}".dataUsingEncoding(NSUTF8StringEncoding)
+        httpRequest.httpBody = "{\"id\":\"\(needId)\",\"token\":\"\(userToken)\",\"quantity\":\"\(quantity)\"}".data(using: String.Encoding.utf8)
         
-        httpHelper.sendRequest(httpRequest, completion: {(data: NSData!, error: NSError!) in
+        httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
             
             guard error == nil else {
                 print(error)
@@ -71,7 +72,7 @@ class NeedModalViewController: UIViewController {
             } catch let error as NSError {
                 print(error)
             }
-        })
+        } as! (NSData?, NSError?) -> Void)
     }
     
     
