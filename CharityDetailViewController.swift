@@ -15,7 +15,7 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var descLabel: UILabel!
     
-    var passedId: Int?
+    var passedId: Int!
     var imageUrl: String!
     
     var httpHelper = HTTPHelper()
@@ -104,8 +104,10 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func requestCharData() {
+        print(passedId!)
+        print(CharityModel.charityData[0])
+        
         let currentCharity = (CharityModel.charityData[passedId!])
-        print(passedId)
         
         let httpRequest = httpHelper.buildRequest(path: "auth/charity", method: "POST")
         let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
@@ -114,7 +116,7 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         httpRequest.httpBody = "{\"id\":\"\(currentCharity.id)\",\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
         
-        httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
+        httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
             
             guard error == nil else {
                 print(error)
@@ -122,7 +124,7 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
             }
             do {
                 
-                let responseDict = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments)
+                let responseDict = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.allowFragments)
                 
                 if let responseDict = responseDict as? [String:AnyObject] {
                 
@@ -142,9 +144,7 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
             } catch let error as NSError {
                 print(error)
             }
-            
-        } as! (NSData?, NSError?) -> Void)
-        
+        })
     }
     
     func loadTableData(needs: NSArray?, events: NSArray?) {
@@ -179,22 +179,20 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         httpRequest.httpBody = "{\"id\":\"\(currentCharity.id)\",\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
         
-        httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
+        httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
             
             guard error == nil else {
                 print(error)
                 return
             }
             do {
-                let responseDict = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments)
+                let responseDict = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.allowFragments)
                 print(responseDict)
                 
             } catch let error as NSError {
                 print(error)
             }
-            
-        } as! (NSData?, NSError?) -> Void)
-        
+        })
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -234,11 +232,12 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.needsTableView {
             let actionForNeed = needData[indexPath.row]
-            //            donateToCharity(actionForNeed.id)
+            
             needId = actionForNeed.id
             needTitle = actionForNeed.name
             quantityNeed = actionForNeed.quantityNeeded
             needStatus = actionForNeed.status
+            
             performSegue(withIdentifier: "needModal", sender: self)
         }
         

@@ -63,7 +63,7 @@ struct HTTPHelper {
         return request
     }    
     
-    func sendRequest(request: NSURLRequest, completion: @escaping (Data?, Error?) -> Void) -> () {
+    func sendRequest(request: NSURLRequest, completion: @escaping (NSData?, NSError?) -> Void) -> () {
         // Create a NSURLSession task
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
@@ -80,7 +80,8 @@ struct HTTPHelper {
             do
             {
                 print(data)
-                completion(data as Data?, nil)
+                completion(data as NSData?, nil)
+                print(data!)
             } catch let parserError as NSError{
                 print(parserError)
             }

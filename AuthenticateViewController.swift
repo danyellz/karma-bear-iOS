@@ -73,12 +73,12 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
                     
                     let userId = result["id"] as! String
                     print(userId)
-                    let accessToken = FBSDKAccessToken.current().tokenString
+                    let accessToken = FBSDKAccessToken.current().tokenString as String
+                    print(accessToken)
                     
                     let httpRequest = self.httpHelper.buildRequest(path: "auth/verify", method: "POST")
                     
                     httpRequest.httpBody = "{\"id\":\"\(userId)\",\"access_token\":\"\(accessToken)\"}".data(using: String.Encoding.utf8)
-                    print(httpRequest.httpBody)
                     
                     self.httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
                         
@@ -88,9 +88,8 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
                         }
                         do
                         {
-                            print(data as! Data)
+                            
                             let responseDict = try JSONSerialization.jsonObject(with: data as! Data, options: JSONSerialization.ReadingOptions.allowFragments)
-                            print(responseDict)
                             
                             UserDefaults.standard.setValue("\(responseDict)", forKey: "FBToken")
                             UserDefaults.standard.synchronize()

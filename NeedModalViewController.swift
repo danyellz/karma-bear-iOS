@@ -59,7 +59,7 @@ class NeedModalViewController: UIViewController {
         
         httpRequest.httpBody = "{\"id\":\"\(needId)\",\"token\":\"\(userToken)\",\"quantity\":\"\(quantity)\"}".data(using: String.Encoding.utf8)
         
-        httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
+        httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
             
             guard error == nil else {
                 print(error)
@@ -72,7 +72,7 @@ class NeedModalViewController: UIViewController {
             } catch let error as NSError {
                 print(error)
             }
-        } as! (NSData?, NSError?) -> Void)
+        })
     }
     
     

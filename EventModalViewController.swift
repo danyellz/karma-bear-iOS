@@ -62,7 +62,7 @@ class EventModalViewController: UIViewController {
         
         httpRequest.httpBody = "{\"id\":\"\(eventId)\",\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
         
-        httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
+        httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
             
             guard error == nil else {
                 print(error)
@@ -75,7 +75,7 @@ class EventModalViewController: UIViewController {
             } catch let error as NSError {
                 print(error)
             }
-        } as! (NSData?, NSError?) -> Void)
+        })
     }
     
 }

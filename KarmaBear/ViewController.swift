@@ -37,7 +37,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
   var httpHelper = HTTPHelper()
   var LocArr: NSMutableArray = NSMutableArray()
-  var charityId: Int?
+  var charityId: Int!
   var passImageUrl: String!
   var descString: String!
   var charitySearchCount = 0
@@ -137,7 +137,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let httpRequest = httpHelper.buildRequest(path: "auth/giver", method: "POST")
             httpRequest.httpBody = "{\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
             
-            httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
+            httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
                 
                 guard error == nil else {
                     print(error)
@@ -149,7 +149,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         CharityModel.userData.removeAll()
                     }
                     
-                    let responseDict = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments)
+                    let responseDict = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.allowFragments)
                     print(responseDict)
                     
                     if let responseDict = responseDict as? [String:AnyObject] {
@@ -181,7 +181,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 } catch let error as NSError {
                     print(error)
                 }
-            } as! (NSData?, NSError?) -> Void)
+            })
         
         activitySpinner.stopAnimating()
         activityView.removeFromSuperview()
@@ -213,10 +213,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             annotation.subtitle = s.address[0] as? String
             annotation.phone = s.phone
             
-            let imageString = NSURL(string: "\(s.imageUrl)")
-            let imageData = NSData(contentsOf: imageString! as URL)
+            let imageString = URL(string: (s.imageUrl as? String)!)
+            print("Image String")
+            print(imageString)
+            
+            let imageData = NSData(contentsOf: imageString!)
+            
             if imageData != nil {
-                annotation.image = UIImage(data: imageData! as Data)
+                annotation.image = UIImage(data: imageData as! Data)
             }
             
             /* Add the annotation to the array */
@@ -319,6 +323,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBAction func searchCoordBtn() {
         searchDBForLocation(search: searchField.text!)
         getUserData()
+        view.endEditing(true)
     }
 
     func searchDBForLocation(search: String) {
@@ -326,7 +331,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let httpRequest = httpHelper.buildRequest(path: "search", method: "POST")
         httpRequest.httpBody = "{\"search\":\"\(search)\"}".data(using: String.Encoding.utf8)
         
-        httpHelper.sendRequest(request: httpRequest, completion: {(data: NSData!, error: NSError!) in
+        httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
             
             guard error == nil else {
                 print(error)
@@ -334,7 +339,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
             do {
                 
-                let responseDict = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions()) as? NSArray
+                let responseDict = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions()) as? NSArray
                 
                 var charityLocations = [CharityStruct]()
                 
@@ -358,8 +363,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             } catch let error as NSError {
                 print(error)
             }
-            
-        } as! (NSData?, NSError?) -> Void)
+        })
         
             self.tableView.reloadData()
         
@@ -407,7 +411,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }else{
             let charityArr = CharityModel.charityData[indexPath.row]
             
-            let url = NSURL(string: "\(charityArr.imageUrl)")
+            let url = NSURL(string: (charityArr.imageUrl as? String)!)
             let thisData = NSData(contentsOf: url! as URL)
             let charityImg = UIImage(data: thisData! as Data)
             
@@ -434,6 +438,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             descString = selectedCharity.description
    
             charityId = indexPath.row
+            
+            print(charityId)
+            
             performSegue(withIdentifier: "charityDetail", sender: self)
         }else{
             showAlert(alertTitle: "Invalid", alertMessage: "It looks like this link is invalid", actionTitle: "Try Another")
@@ -441,13 +448,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         print(segue.identifier)
         
         if (segue.identifier == "charityDetail") {
             let viewController = segue.destination as! CharityDetailViewController
             viewController.passedId = charityId
+            print(viewController.passedId)
             viewController.imageUrl = passImageUrl
             viewController.descString = descString
         }
