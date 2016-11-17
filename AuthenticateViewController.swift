@@ -68,7 +68,7 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
                         return
                     }
                     
-                    if let result = result as? [String: AnyObject] {
+                    let result = result as! [String: AnyObject]
                     
                         let userId = result["id"] as! String
                         let accessToken = FBSDKAccessToken.current().tokenString
@@ -97,11 +97,11 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
                                 print(error)
                             }
                         } as! (NSData?, NSError?) -> Void)
-                            
-                        }
                 }
                 
-                self.dismiss(animated: true, completion: nil)
+                print("Success! Dimissing VC!")
+                
+                dismiss(animated: true, completion: nil)
             }
         }
     }

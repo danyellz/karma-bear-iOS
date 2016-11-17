@@ -1,3 +1,4 @@
+
 //
 //  CharityLocTableView.swift
 //  KarmaBear
@@ -10,8 +11,8 @@ import Foundation
 import UIKit
 class CharityLocTableView: UITableView, UITableViewDelegate {
     
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        let hitView = super.hitTest(point, withEvent: event)
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
         if (point.y<0)
         {
             return hitView

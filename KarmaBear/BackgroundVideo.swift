@@ -1,3 +1,6 @@
+
+
+
 //
 //  BackgroundVideo.swift
 //
@@ -26,10 +29,10 @@ class BackgroundVideo {
         let videoNameAndExtension:[String]? = URL.characters.split{$0 == "."}.map(String.init)
         if videoNameAndExtension!.count == 2 {
             if let videoName = videoNameAndExtension?[0] , let videoExtension = videoNameAndExtension?[1] {
-                if let url = NSBundle.mainBundle().URLForResource(videoName, withExtension: videoExtension) {
-                    self.videoURL = url
+                if let url = Bundle.main.url(forResource: videoName, withExtension: videoExtension) {
+                    self.videoURL = url as NSURL?
                     // initialize our player with our fetched video url
-                    self.backGroundPlayer = AVPlayer(URL: self.videoURL!)
+                    self.backGroundPlayer = AVPlayer(url: self.videoURL! as URL)
                 } else {
                     print("Invalid Video!")
                 }
@@ -43,9 +46,9 @@ class BackgroundVideo {
     deinit{
         
         if self.hasBeenUsed {
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillEnterForegroundNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         }
         
     }
@@ -55,8 +58,8 @@ class BackgroundVideo {
      setUpBackground is a function that should be called in viewDidLoad to load a local background video to play as your background
      */
     func setUpBackground(){
-        self.backGroundPlayer?.actionAtItemEnd = .None
-        self.backGroundPlayer?.muted = true // mute the background video....
+        self.backGroundPlayer?.actionAtItemEnd = .none
+        self.backGroundPlayer?.isMuted = true // mute the background video....
         
         //add the video to your view ..
         let loginView: UIView = self.viewController!.view//get our view controllers view
@@ -80,16 +83,16 @@ class BackgroundVideo {
         self.backGroundPlayer?.play() // start the video
         
         /// Loop the video when it ends using NSNotifcationCenter
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.loopVideo), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.loopVideo), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         // call the background video again if your application goes to background and foreground again
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.loopVideo), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.loopVideo), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         self.hasBeenUsed = true
     
     }
     
     // A function that will restarts the video for the purpose of looping
    @objc private func loopVideo() {
-        self.backGroundPlayer?.seekToTime(kCMTimeZero)
+        self.backGroundPlayer?.seek(to: kCMTimeZero)
         self.backGroundPlayer?.play()
     }
     

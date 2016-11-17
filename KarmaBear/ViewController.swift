@@ -148,24 +148,28 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         CharityModel.userData.removeAll()
                     }
                     
-                    let responseDict = try JSONSerialization.JSONObjectWithData(data as Data, options: JSONSerialization.ReadingOptions.AllowFragments)
+                    let responseDict = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments)
                     
-                    let user = responseDict["giver"] as! [String:AnyObject]
-                    print(user)
+                    if let responseDict = responseDict as? [String:AnyObject] {
                     
-                    let userEvents = responseDict["events"] as! NSArray
-                    let userNeeds = responseDict["needs"] as! NSArray
-            
-                    
-                    CharityModel.userData.insert((UserStruct(dictionary: user)), atIndex: 0)
-                    print(CharityModel.userData[0])
-                    
-                    for event in userEvents {
-                        CharityModel.userEvents.append(EventStruct(dictionary: event as! [String : AnyObject] ))
-                    }
-                    
-                    for need in userNeeds {
-                        CharityModel.userNeeds.append(NeedStruct(dictionary: need as! [String : AnyObject]))
+                        let user = responseDict["giver"] as! [String:AnyObject]
+                        print(user)
+                        
+                        let userEvents = responseDict["events"] as! NSArray
+                        let userNeeds = responseDict["needs"] as! NSArray
+                
+                        
+                        CharityModel.userData.insert((UserStruct(dictionary: user)), at: 0)
+                        print(CharityModel.userData[0])
+                        
+                        for event in userEvents {
+                            CharityModel.userEvents.append(EventStruct(dictionary: event as! [String : AnyObject] ))
+                        }
+                        
+                        for need in userNeeds {
+                            CharityModel.userNeeds.append(NeedStruct(dictionary: need as! [String : AnyObject]))
+                        }
+                        
                     }
                     
                     print(CharityModel.userEvents)
@@ -447,7 +451,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         
         if (segue.identifier == "activityDetail") {
-            let toViewController = segue.destination as! UserActivityViewController
+            _ = segue.destination as! UserActivityViewController
         }
         
     }
