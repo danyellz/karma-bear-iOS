@@ -29,4 +29,5 @@ struct GlobalAssets {
     static let BEAR_ANNOTATION = "KarmaBear"
     static let DEFAULT_BEAR = "Launch"
     static let BEAR_FROM_URL = "https://s-media-cache-ak0.pinimg.com/originals/37/30/41/37304117db4d017b4ef48d309b046b62.png"
+    
 }
