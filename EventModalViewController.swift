@@ -25,6 +25,11 @@ class EventModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
+    }
+    
+    func setupView() {
+        
         modalView.layer.cornerRadius = 10
         
         let blurEffect = UIBlurEffect(style: .dark)
@@ -32,14 +37,12 @@ class EventModalViewController: UIViewController {
         blurEffectView.frame = self.view.frame
         
         self.view.insertSubview(blurEffectView, at: 0)
-        
-        setupView()
-    }
-    
-    func setupView() {
+
         descriptionText.text = eventDescription
         startLabel.text = eventStart
+        
         endLabel.text = eventEnd
+        
         descriptionText.lineBreakMode = NSLineBreakMode.byWordWrapping
         descriptionText.numberOfLines = 0
     }
@@ -55,7 +58,7 @@ class EventModalViewController: UIViewController {
     
     func registerForEvent(eventId: Int) {
         
-        let httpRequest = httpHelper.buildRequest(path: "auth/register", method: "POST")
+        let httpRequest = httpHelper.buildRequest(path: RequestRoutes.REGISTER_EVENT, method: "POST")
         let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
         let userToken = currentUserToken! as String
         
@@ -67,9 +70,9 @@ class EventModalViewController: UIViewController {
                 print(error)
                 return
             }
-            do {
-                //                let responseDict = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
-                //                print(responseDict)
+            do
+            {
+                //Get success/failure reponse after registering to event.
                 
             } catch let error as NSError {
                 print(error)

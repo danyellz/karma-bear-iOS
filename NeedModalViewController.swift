@@ -50,7 +50,7 @@ class NeedModalViewController: UIViewController {
     }
     
     func donateToCharity(needId: Int) {
-        let httpRequest = httpHelper.buildRequest(path: "auth/donate", method: "POST")
+        let httpRequest = httpHelper.buildRequest(path: RequestRoutes.MAKE_DONATION, method: "POST")
         let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
         let userToken = currentUserToken! as String
         let quantity = quantityInput.text!
@@ -63,10 +63,11 @@ class NeedModalViewController: UIViewController {
                 print(error)
                 return
             }
-            do {
-                //                let responseDict = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
-                //                print(responseDict)
-            } catch let error as NSError {
+            do
+            {
+                //Get donation success or failure responses.
+            }
+            catch let error as NSError {
                 print(error)
             }
         })

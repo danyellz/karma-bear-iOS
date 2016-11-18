@@ -42,8 +42,6 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestCharData()
-        
         needsTableView.dataSource = self
         needsTableView.delegate = self
         needsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "needsCell")
@@ -58,6 +56,7 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         descLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         descLabel.numberOfLines = 0
         
+        requestCharData()
         loadCharityDisplay()
         
     }
@@ -81,13 +80,13 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
             let url = NSURL(string: self.imageUrl!)
             
             DispatchQueue.main.async {
-                
                 let thisData = NSData(contentsOf: url! as URL)
                 self.mainImageView.image = UIImage(data: thisData! as Data)
             }
         }
-        else{
-            let url = NSURL(string: "https://s-media-cache-ak0.pinimg.com/originals/37/30/41/37304117db4d017b4ef48d309b046b62.png")
+        else
+        {
+            let url = NSURL(string: GlobalAssets.BEAR_FROM_URL)
             
             DispatchQueue.main.async {
                 let thisData = NSData(contentsOf: url! as URL)
@@ -99,16 +98,11 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func requestCharData() {
-        print(passedId!)
-        print(CharityModel.charityData[0])
-        
         let currentCharity = (CharityModel.charityData[passedId!])
-        
-        let httpRequest = httpHelper.buildRequest(path: "auth/charity", method: "POST")
+        let httpRequest = httpHelper.buildRequest(path: RequestRoutes.CHARITY_DETAILS, method: "POST")
         let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
         let userToken = currentUserToken! as String
-        print(userToken)
-        
+    
         httpRequest.httpBody = "{\"id\":\"\(currentCharity.id)\",\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
         
         httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
@@ -153,13 +147,12 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         for event in events! {
             eventData.append(EventStruct(dictionary: event as! [String: AnyObject]))
         }
-        
     }
     
     func followCharity() {
         let currentCharity = (CharityModel.charityData[passedId!])
         
-        let httpRequest = httpHelper.buildRequest(path: "auth/follow", method: "POST")
+        let httpRequest = httpHelper.buildRequest(path: RequestRoutes.FOLLOW_CHARITY, method: "POST")
         let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
         let userToken = currentUserToken! as String
         print(userToken)
@@ -171,9 +164,9 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
                 print(error)
                 return
             }
-            do {
+            do
+            {
                 let responseDict = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.allowFragments)
-                print(responseDict)
                 
             } catch let error as NSError {
                 print(error)
@@ -194,7 +187,6 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var cell:UITableViewCell?
         
         if tableView == self.needsTableView {
@@ -208,7 +200,6 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
             let needsDetail = eventData[indexPath.row]
             cell!.textLabel!.text = needsDetail.name
         }
-        
         return cell!
     }
     
@@ -244,7 +235,6 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         }
         return title
     }
-    
     
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "needModal") {

@@ -47,16 +47,6 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
     }
     
     func setUpViews() {
-        let activityView = UIView.init(frame: view.frame)
-        activityView.backgroundColor = UIColor.gray
-        activityView.alpha = 1
-        view.addSubview(activityView)
-        
-        let activitySpinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-        activitySpinner.center = view.center
-        activitySpinner.startAnimating()
-        activityView.addSubview(activitySpinner)
-        
         let userData = CharityModel.userData[0]
         let url = NSURL(string: userData.imageUrl)
         let thisData = NSData(contentsOf: url! as URL)
@@ -72,9 +62,6 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
         blurEffectView.frame = self.headerImage.frame
         
         self.headerImage.insertSubview(blurEffectView, at: 0)
-        
-        activitySpinner.stopAnimating()
-        activityView.removeFromSuperview()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -115,6 +102,10 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.needsTableView {
+            
+            //TODO: Select data from user profile and EDIT/UPDATE/REVISE charity activity.
+            //Add logic to save users changes to PostGres.
+            
             _ = CharityModel.userNeeds[indexPath.row]
             
             //            donateToCharity(actionForNeed.id)
@@ -146,7 +137,6 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
         if tableView == self.eventsTableView {
             title = headersArr[1]
         }
-        
         return title
     }
     
