@@ -42,7 +42,6 @@ class BackgroundVideo {
         }
     }
     
-    
     deinit{
         
         if self.hasBeenUsed {
@@ -52,7 +51,6 @@ class BackgroundVideo {
         }
         
     }
-    
     
     /*
      setUpBackground is a function that should be called in viewDidLoad to load a local background video to play as your background

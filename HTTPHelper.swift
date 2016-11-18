@@ -43,23 +43,6 @@ struct HTTPHelper {
             request.addValue(contentType, forHTTPHeaderField: "Content-Type")
         }
         
-        //      // 3. Set the correct Authorization header.
-        //      switch authType {
-        //      case .HTTPBasicAuth:
-        //        // Set BASIC authentication header
-        //        let basicAuthString = "\(HTTPHelper.API_AUTH_NAME):\(HTTPHelper.API_AUTH_PASSWORD)"
-        //        let utf8str = basicAuthString.dataUsingEncoding(NSUTF8StringEncoding)
-        //        let base64EncodedString = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
-        //
-        //        request.addValue("Basic \(base64EncodedString!)", forHTTPHeaderField: "Authorization")
-        //      case .HTTPTokenAuth:
-        //        // Retreieve Auth_Token from Keychain
-        //        if let userToken = KeychainAccess.passwordForAccount("Auth_Token", service: "KeyChainService") as String? {
-        //          // Set Authorization header
-        //          request.addValue("Token token=\(userToken)", forHTTPHeaderField: "Authorization")
-        //        }
-        //    }
-        
         return request
     }    
     
@@ -127,6 +110,7 @@ struct HTTPHelper {
         }
         task.resume()
     }
+    
     
     func sharedInstance() -> HTTPHelper {
         

@@ -14,26 +14,11 @@ var tableView: UITableView!
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
-    
-  @IBOutlet weak var signinBackgroundView: UIView!
-  @IBOutlet weak var signupBackgroundView: UIView!
-  @IBOutlet weak var signinEmailTextField: UITextField!
-  @IBOutlet weak var signinPasswordTextField: UITextField!
-  @IBOutlet weak var signupNameTextField: UITextField!
-  @IBOutlet weak var signupEmailTextField: UITextField!
-  @IBOutlet weak var signupPasswordTextField: UITextField!
-  @IBOutlet weak var activityIndicatorView: UIView!
-  @IBOutlet weak var passwordRevealBtn: UIButton!
   @IBOutlet weak var tableView: CharityLocTableView!
-    @IBOutlet weak var charityCellImageView: UIImageView!
-    
+  @IBOutlet weak var charityCellImageView: UIImageView!
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var searchField: UITextField!
-    @IBOutlet weak var userNavBtn: UIButton!
-    
-  
-  let cllocationManager: CLLocationManager = CLLocationManager()
-//  let transitionManager = TransitionManager()
+  @IBOutlet weak var userNavBtn: UIButton!
     
   var httpHelper = HTTPHelper()
   var LocArr: NSMutableArray = NSMutableArray()
@@ -41,6 +26,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
   var passImageUrl: String!
   var descString: String!
   var charitySearchCount = 0
+    
+  let cllocationManager: CLLocationManager = CLLocationManager()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -60,32 +47,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     let userImg = UIImage(named: "UserIcon")
     userNavBtn.setImage(userImg, for: .normal)
     
-    if UserDefaults.standard.string(forKey: "FBToken") == nil {
-        print("No registered token")
-        performSegue(withIdentifier: "authFailure", sender: self)
-    }
-    
-    if UserDefaults.standard.string(forKey: "FBToken") != nil {
-        print("Token registered")
-        
-        let activityView = UIView.init(frame: view.frame)
-        activityView.backgroundColor = UIColor.gray
-        activityView.alpha = 1
-        view.addSubview(activityView)
-        
-        let activitySpinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-        activitySpinner.center = view.center
-        activitySpinner.startAnimating()
-        activityView.addSubview(activitySpinner)
-
-        getUserData()
-        
-        activitySpinner.stopAnimating()
-        activityView.removeFromSuperview()
-        
-        showAlert(alertTitle: "Wecome to KarmaBear", alertMessage: "Start giving by adding a destination", actionTitle: "Ok")
-    }
-    
+    checkForFBAuth()
   }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,26 +69,36 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     
-    func mapView(mapView: MKMapView, didUpdateUserLocation
-        userLocation: MKUserLocation) {
-
-        mapView.centerCoordinate = userLocation.location!.coordinate
-        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 50000, 50000)
-    
-        mapView.setRegion(region, animated: true)
-    } 
+    func checkForFBAuth() {
+        
+        if UserDefaults.standard.string(forKey: "FBToken") == nil {
+            print("No registered token")
+            performSegue(withIdentifier: "authFailure", sender: self)
+        }
+        
+        if UserDefaults.standard.string(forKey: "FBToken") != nil {
+            print("Token registered")
+            
+            let activityView = UIView.init(frame: view.frame)
+            activityView.backgroundColor = UIColor.gray
+            activityView.alpha = 1
+            view.addSubview(activityView)
+            
+            let activitySpinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+            activitySpinner.center = view.center
+            activitySpinner.startAnimating()
+            activityView.addSubview(activitySpinner)
+            
+            getUserData()
+            
+            activitySpinner.stopAnimating()
+            activityView.removeFromSuperview()
+            
+            showAlert(alertTitle: "Wecome to KarmaBear", alertMessage: "Start giving by adding a destination", actionTitle: "Ok")
+        }
+    }
     
     func getUserData() {
-        
-        let activityView = UIView.init(frame: view.frame)
-        activityView.backgroundColor = UIColor.gray
-        activityView.alpha = 1
-        view.addSubview(activityView)
-        
-        let activitySpinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-        activitySpinner.center = view.center
-        activitySpinner.startAnimating()
-        activityView.addSubview(activitySpinner)
             
             print("Creating User Data...")
             
@@ -143,8 +115,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     print(error)
                     return
                 }
-                do {
-                    
+                do
+                {
                     if !CharityModel.userData.isEmpty {
                         CharityModel.userData.removeAll()
                     }
@@ -155,12 +127,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     if let responseDict = responseDict as? [String:AnyObject] {
                     
                         let user = responseDict["giver"] as! [String:AnyObject]
-                        print(user)
-                        
                         let userEvents = responseDict["events"] as! NSArray
                         let userNeeds = responseDict["needs"] as! NSArray
                 
-                        
                         CharityModel.userData.insert((UserStruct(dictionary: user)), at: 0)
                         print(CharityModel.userData[0])
                         
@@ -171,23 +140,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         for need in userNeeds {
                             CharityModel.userNeeds.append(NeedStruct(dictionary: need as! [String : AnyObject]))
                         }
-                        
                     }
-                    
-                    print(CharityModel.userEvents)
-                    print(CharityModel.userNeeds)
-                    
-                
                 } catch let error as NSError {
                     print(error)
                 }
             })
-        
-        activitySpinner.stopAnimating()
-        activityView.removeFromSuperview()
     }
   
-    func populateMapData(newCoordArr:[CharityStruct]) {
+    func populateMapFromData(newCoordArr:[CharityStruct]) {
         
         if !mapView.annotations.isEmpty{
             mapView.removeAnnotations(mapView.annotations)
@@ -231,76 +191,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.mapView.addAnnotations(annotations)
                 self.mapView.showAnnotations(annotations, animated: true)
         }
-        
         tableView.reloadData()
-        
-    }
-
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        let reuseIdentifier = "pin"
-        
-        var v = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
-        if v == nil {
-            v = AnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            v!.canShowCallout = true
-        }
-        else {
-            v!.annotation = annotation
-        }
-        
-        if CharityModel.charityData.count > 0 {
-            let customPointAnnotation = annotation as! CharityAnnotation
-            
-            if customPointAnnotation.image != nil {
-                v!.image = resizeImage(image: customPointAnnotation.image!, newWidth: 60)
-                v!.layer.borderWidth = 2
-                v!.layer.borderColor = UIColor.gray.cgColor
-                v!.layer.cornerRadius = 10
-                
-            }
-        }
-        else{
-            v!.image = UIImage(named: "KarmaBear")
-        }
-        
-        v!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        
-        return v
-    }
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-        if control == view.rightCalloutAccessoryView{
-            
-            view.layer.cornerRadius = 0.5
-            
-            print(view.annotation?.title)
-            
-        }
-        
-        
-        //CUSTOM CALLOUT IMPLEMENTATION
-                
-
-        //            let charityAnnotation = view.annotation as! CharityAnnotation
-        //            let views = NSBundle.mainBundle().loadNibNamed("CustomCalloutView", owner: nil, options: nil)
-        //            let calloutView = views?[0] as! CustomCalloutView
-        //            calloutView.charityName.text = charityAnnotation.title
-        //            calloutView.charityAddress.text = charityAnnotation.address
-        //            calloutView.charityPhone.text = charityAnnotation.phone
-        //            print(calloutView.charityPhone.text)
-        //            
-        //            let tapGesture = UITapGestureRecognizer(target: self, action: Selector(("CallPhoneNumber:")))
-        //            calloutView.charityPhone.addGestureRecognizer(tapGesture)
-        //            calloutView.charityPhone.userInteractionEnabled = true
-        //            calloutView.charityImage.image = charityAnnotation.image
-        //            // 3
-        //            calloutView.center = CGPoint(x: view.bounds.size.width / 2, y: -calloutView.bounds.size.height*0.52)
-        //            view.addSubview(calloutView)
-        //            mapView.setCenterCoordinate((view.annotation?.coordinate)!, animated: true)s
-
     }
     
 //    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
@@ -357,7 +248,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 }
                 
                 DispatchQueue.main.async {
-                    self.populateMapData(newCoordArr: charityLocations)
+                    self.populateMapFromData(newCoordArr: charityLocations)
                 }
                 
             } catch let error as NSError {
@@ -389,15 +280,60 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        mapView.centerCoordinate = userLocation.location!.coordinate
+        
+        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 50000, 50000)
+        mapView.setRegion(region, animated: true)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseIdentifier = "pin"
+        
+        var v = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        if v == nil {
+            v = AnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            v!.canShowCallout = true
+        }
+        else {
+            v!.annotation = annotation
+        }
+        
+        if CharityModel.charityData.count > 0 {
+            let customPointAnnotation = annotation as! CharityAnnotation
+            
+            if customPointAnnotation.image != nil {
+                v!.image = resizeImage(image: customPointAnnotation.image!, newWidth: 60)
+                v!.layer.borderWidth = 2
+                v!.layer.borderColor = UIColor.gray.cgColor
+                v!.layer.cornerRadius = 10
+            }
+        }
+        else{
+            v!.image = UIImage(named: "KarmaBear")
+        }
+        
+        v!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        
+        return v
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView{
+            view.layer.cornerRadius = 0.5
+            print(view.annotation?.title)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         if CharityModel.charityData.count <= 0 {
             count = 5
         }
-        else{
+        else
+        {
             count = CharityModel.charityData.count
         }
-        
         return count
     }
     
@@ -423,23 +359,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             (cell?.contentView.viewWithTag(21) as? UILabel)!.text = charityArr.name
             (cell?.contentView.viewWithTag(22) as? UILabel)!.text = charityArr.address[0] as? String
         }
-        
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        
         if CharityModel.charityData.count != 0 {
             let selectedCharity = CharityModel.charityData[indexPath.row]
-            print(selectedCharity)
-            
-            
             passImageUrl = selectedCharity.imageUrl
             descString = selectedCharity.description
    
             charityId = indexPath.row
-            
-            print(charityId)
             
             performSegue(withIdentifier: "charityDetail", sender: self)
         }else{
@@ -449,9 +378,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        print(segue.identifier)
-        
         if (segue.identifier == "charityDetail") {
             let viewController = segue.destination as! CharityDetailViewController
             viewController.passedId = charityId
@@ -459,20 +385,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             viewController.imageUrl = passImageUrl
             viewController.descString = descString
         }
-        
-        if (segue.identifier == "activityDetail") {
-            _ = segue.destination as! UserActivityViewController
-        }
-        
     }
-
-
-  
-  func updateUserLoggedInFlag() {
-    let defaults = UserDefaults.standard
-    defaults.set("loggedIn", forKey: "userLoggedIn")
-    defaults.synchronize()
-  }
     
     func showAlert(alertTitle: String, alertMessage: String, actionTitle: String){
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)

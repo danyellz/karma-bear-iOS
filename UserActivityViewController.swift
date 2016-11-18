@@ -47,10 +47,8 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
     }
     
     func setUpViews() {
-        
         let activityView = UIView.init(frame: view.frame)
         activityView.backgroundColor = UIColor.gray
-        
         activityView.alpha = 1
         view.addSubview(activityView)
         
@@ -60,11 +58,7 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
         activityView.addSubview(activitySpinner)
         
         let userData = CharityModel.userData[0]
-        
         let url = NSURL(string: userData.imageUrl)
-        print(url)
-        
-        
         let thisData = NSData(contentsOf: url! as URL)
         let userImg = UIImage(data: thisData! as Data)
         
@@ -81,7 +75,6 @@ class UserActivityViewController: UIViewController, UIScrollViewDelegate, UITabl
         
         activitySpinner.stopAnimating()
         activityView.removeFromSuperview()
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

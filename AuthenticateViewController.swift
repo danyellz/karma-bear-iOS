@@ -24,7 +24,6 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
         super.viewDidLoad()
         
         let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
-        print(currentUserToken)
         
         if currentUserToken != nil {
             dismiss(animated: true, completion: nil)
@@ -61,51 +60,51 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-                let parameters = ["fields": "email, first_name, last_name, picture.type(large)"]
-                FBSDKGraphRequest(graphPath: "me", parameters: parameters).start{ (connection, result, error) -> Void in
-                    
-                    if error != nil {
-                        print(error)
-                        return
-                    }
-                    
-                    let result = result as! [String:AnyObject]
-                    
-                    let userId = result["id"] as! String
-                    print(userId)
-                    let accessToken = FBSDKAccessToken.current().tokenString as String
-                    print(accessToken)
-                    
-                    let httpRequest = self.httpHelper.buildRequest(path: "auth/verify", method: "POST")
-                    
-                    httpRequest.httpBody = "{\"id\":\"\(userId)\",\"access_token\":\"\(accessToken)\"}".data(using: String.Encoding.utf8)
-                    
-                    self.httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
-                        
-                        guard error == nil else {
-                            print(error)
-                            return
-                        }
-                        do
-                        {
-                            
-                            let responseDict = try JSONSerialization.jsonObject(with: data as! Data, options: JSONSerialization.ReadingOptions.allowFragments)
-                            
-                            UserDefaults.standard.setValue("\(responseDict)", forKey: "FBToken")
-                            UserDefaults.standard.synchronize()
-                            
-                            let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
-                            print(currentUserToken)
-                            
-                        } catch let error as NSError {
-                            print(error)
-                        }
-                    })
-                }
-                
-                self.dismiss(animated: true, completion: nil)
+                getTokenFromFB()
             }
         }
+    }
+    
+    func getTokenFromFB() {
+        
+        let parameters = ["fields": "email, first_name, last_name, picture.type(large)"]
+        
+        FBSDKGraphRequest(graphPath: "me", parameters: parameters).start{ (connection, result, error) -> Void in
+            
+            let result = result as! [String:AnyObject]
+            let userId = result["id"] as! String
+            let accessToken = FBSDKAccessToken.current().tokenString as String
+            
+            guard error == nil else{
+                print(error)
+                return
+            }
+            
+            let httpRequest = self.httpHelper.buildRequest(path: "auth/verify", method: "POST")
+            httpRequest.httpBody = "{\"id\":\"\(userId)\",\"access_token\":\"\(accessToken)\"}".data(using: String.Encoding.utf8)
+            
+            self.httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
+                
+                guard error == nil else {
+                    print(error)
+                    return
+                }
+                do
+                {
+                    let responseDict = try JSONSerialization.jsonObject(with: data as! Data, options: JSONSerialization.ReadingOptions.allowFragments)
+                    
+                    UserDefaults.standard.setValue("\(responseDict)", forKey: "FBToken")
+                    UserDefaults.standard.synchronize()
+                    
+                    let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
+                    print(currentUserToken)
+                    
+                } catch let error as NSError {
+                    print(error)
+                }
+            })
+        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {

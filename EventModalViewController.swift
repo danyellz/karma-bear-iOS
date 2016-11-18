@@ -40,7 +40,6 @@ class EventModalViewController: UIViewController {
         descriptionText.text = eventDescription
         startLabel.text = eventStart
         endLabel.text = eventEnd
-        
         descriptionText.lineBreakMode = NSLineBreakMode.byWordWrapping
         descriptionText.numberOfLines = 0
     }

@@ -73,15 +73,12 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     @IBAction func followThisCharity(sender: AnyObject) {
-        
         followCharity()
     }
     
     func loadCharityDisplay() {
-        
         if imageUrl != nil {
             let url = NSURL(string: self.imageUrl!)
-            print(url)
             
             DispatchQueue.main.async {
                 
@@ -93,12 +90,10 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
             let url = NSURL(string: "https://s-media-cache-ak0.pinimg.com/originals/37/30/41/37304117db4d017b4ef48d309b046b62.png")
             
             DispatchQueue.main.async {
-                
                 let thisData = NSData(contentsOf: url! as URL)
                 self.mainImageView.image = UIImage(data: thisData! as Data)
             }
         }
-        
         descLabel.text = descString
     }
     
@@ -122,16 +117,13 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
                 print(error)
                 return
             }
-            do {
-                
+            do
+            {
                 let responseDict = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.allowFragments)
                 
                 if let responseDict = responseDict as? [String:AnyObject] {
-                
                     let needArr = responseDict["needs"] as? NSArray
                     let eventArr = responseDict["events"] as? NSArray
-                    
-                    print(needArr)
                     
                     self.loadTableData(needs: needArr, events: eventArr)
                 }
@@ -148,21 +140,16 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func loadTableData(needs: NSArray?, events: NSArray?) {
-        
         if !eventData.isEmpty{
             eventData.removeAll()
         }
-        
         if !needData.isEmpty{
             needData.removeAll()
         }
         
-        
         for need in needs! {
             needData.append(NeedStruct(dictionary: need as! [String: AnyObject]))
         }
-        
-        
         for event in events! {
             eventData.append(EventStruct(dictionary: event as! [String: AnyObject]))
         }
@@ -180,7 +167,6 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         httpRequest.httpBody = "{\"id\":\"\(currentCharity.id)\",\"token\":\"\(userToken)\"}".data(using: String.Encoding.utf8)
         
         httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
-            
             guard error == nil else {
                 print(error)
                 return
@@ -196,17 +182,14 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         var count:Int?
         
         if tableView == self.needsTableView {
             count = needData.count
-            
         }
         if tableView == self.eventsTableView {
             count = eventData.count
         }
-        
         return count!
     }
     
@@ -232,7 +215,6 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.needsTableView {
             let actionForNeed = needData[indexPath.row]
-            
             needId = actionForNeed.id
             needTitle = actionForNeed.name
             quantityNeed = actionForNeed.quantityNeeded
@@ -243,7 +225,6 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         if tableView == self.eventsTableView {
             let actionForEvent = eventData[indexPath.row]
-            //
             eventId = actionForEvent.id
             eventTitle = actionForEvent.name
             eventDescription = actionForEvent.description
@@ -255,20 +236,17 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         if tableView == self.needsTableView {
             title = headersArr[0]
         }
         if tableView == self.eventsTableView {
             title = headersArr[1]
         }
-        
         return title
     }
     
     
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if (segue.identifier == "needModal") {
             let viewController = segue.destination as! NeedModalViewController
             viewController.needId = needId
@@ -278,7 +256,6 @@ class CharityDetailViewController: UIViewController, UITableViewDelegate, UITabl
             
             viewController.modalPresentationStyle = .overCurrentContext
         }
-        
         if (segue.identifier == "eventModal") {
             let viewController = segue.destination as! EventModalViewController
             viewController.eventId = eventId

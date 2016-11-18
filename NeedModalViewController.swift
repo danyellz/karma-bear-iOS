@@ -25,6 +25,12 @@ class NeedModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
+    }
+    
+    func setupView() {
+        needsList.text = needTitle
+        needNumber.text = String(quantityNeed)
         modalView.layer.cornerRadius = 10
         
         let blurEffect = UIBlurEffect(style: .dark)
@@ -32,13 +38,6 @@ class NeedModalViewController: UIViewController {
         blurEffectView.frame = self.view.frame
         
         self.view.insertSubview(blurEffectView, at: 0)
-        
-        setupView()
-    }
-    
-    func setupView() {
-        needsList.text = needTitle
-        needNumber.text = String(quantityNeed)
     }
     
     @IBAction func dismissModal(sender: AnyObject) {
@@ -51,7 +50,6 @@ class NeedModalViewController: UIViewController {
     }
     
     func donateToCharity(needId: Int) {
-        
         let httpRequest = httpHelper.buildRequest(path: "auth/donate", method: "POST")
         let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
         let userToken = currentUserToken! as String
@@ -68,13 +66,10 @@ class NeedModalViewController: UIViewController {
             do {
                 //                let responseDict = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
                 //                print(responseDict)
-                
             } catch let error as NSError {
                 print(error)
             }
         })
     }
-    
-    
 }
 
