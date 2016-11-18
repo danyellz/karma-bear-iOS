@@ -10,10 +10,8 @@ import UIKit
 import FBSDKLoginKit
 
 class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
-    
     var httpHelper = HTTPHelper()
     var backgroundPlayer : BackgroundVideo?
-    
     let loginView: FBSDKLoginButton = {
         let button = FBSDKLoginButton()
         button.readPermissions = ["email"]
@@ -22,11 +20,9 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let currentUserToken = UserDefaults.standard.string(forKey: "FBToken")
-        
-        if currentUserToken != nil {
-            dismiss(animated: true, completion: nil)
+
+        if FBConstants.USER_KEY != nil {
+            self.dismiss(animated: true, completion: nil)
         }
         
         if (FBSDKAccessToken.current() != nil){
@@ -40,12 +36,11 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
             loginView.delegate = self
         }
         
-        backgroundPlayer = BackgroundVideo(on: self, withVideoURL: "charity-1.mp4")
+        backgroundPlayer = BackgroundVideo(on: self, withVideoURL: GlobalAssets.VIDEO_LINK)
         backgroundPlayer!.setUpBackground()
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        print("User Logged In")
         
         if ((error) != nil)
         {
@@ -66,9 +61,7 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
     }
     
     func getTokenFromFB() {
-        
         let parameters = ["fields": "email, first_name, last_name, picture.type(large)"]
-        
         FBSDKGraphRequest(graphPath: "me", parameters: parameters).start{ (connection, result, error) -> Void in
             
             let result = result as! [String:AnyObject]
@@ -80,7 +73,7 @@ class AuthenticateViewController: UIViewController, FBSDKLoginButtonDelegate{
                 return
             }
             
-            let httpRequest = self.httpHelper.buildRequest(path: "auth/verify", method: "POST")
+            let httpRequest = self.httpHelper.buildRequest(path: RequestRoutes.VERIFY_USER, method: "POST")
             httpRequest.httpBody = "{\"id\":\"\(userId)\",\"access_token\":\"\(accessToken)\"}".data(using: String.Encoding.utf8)
             
             self.httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in

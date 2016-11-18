@@ -19,7 +19,7 @@ enum HTTPRequestContentType {
     case HTTPMultipartContent
 }
 struct HTTPHelper {
-    static let BASE_URL = "http://karmabear.herokuapp.com/api"
+    static let BASE_URL = FBConstants.BASE_URL
     
     func buildRequest(path: String!, method: String,
                       requestContentType: HTTPRequestContentType = HTTPRequestContentType.HTTPJsonContent, requestBoundary:String = "") -> NSMutableURLRequest {

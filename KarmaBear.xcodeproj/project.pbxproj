@@ -10,6 +10,7 @@
 		108DD8141DDD83EE00784F8F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108DD8131DDD83EE00784F8F /* MapKit.framework */; };
 		108DD8161DDD83FB00784F8F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108DD8151DDD83FB00784F8F /* CoreLocation.framework */; };
 		108DD8181DDD841500784F8F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 108DD8171DDD841500784F8F /* libsqlite3.0.tbd */; };
+		1098DEE41DDF9C9A00AAF9C6 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098DEE31DDF9C9A00AAF9C6 /* APIConstants.swift */; };
 		10BC4CE91DDD512A00E6F2BD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CE81DDD512A00E6F2BD /* AVFoundation.framework */; };
 		10BC4CEB1DDD513000E6F2BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CEA1DDD513000E6F2BD /* Foundation.framework */; };
 		10BC4CED1DDD518400E6F2BD /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BC4CEC1DDD518400E6F2BD /* Bolts.framework */; };
@@ -66,6 +67,7 @@
 		108DD8131DDD83EE00784F8F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		108DD8151DDD83FB00784F8F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		108DD8171DDD841500784F8F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		1098DEE31DDF9C9A00AAF9C6 /* APIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		10BC4CDD1DDD501900E6F2BD /* KarmaBearTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KarmaBearTests-Bridging-Header.h"; path = "KarmaBearTests/KarmaBearTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		10BC4CE81DDD512A00E6F2BD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		10BC4CEA1DDD513000E6F2BD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -141,6 +143,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1098DEE21DDF9C6900AAF9C6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1098DEE31DDF9C9A00AAF9C6 /* APIConstants.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		10BC4CE11DDD505C00E6F2BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +169,7 @@
 		10D0F3101DDD425F00A29AC0 = {
 			isa = PBXGroup;
 			children = (
+				1098DEE21DDF9C6900AAF9C6 /* Common */,
 				10BC4CE11DDD505C00E6F2BD /* Frameworks */,
 				10D0F36C1DDD489300A29AC0 /* RequestHelpers */,
 				10D0F35A1DDD473C00A29AC0 /* Views */,
@@ -408,6 +419,7 @@
 				10D0F3701DDD48D100A29AC0 /* HTTPHelper.swift in Sources */,
 				10D0F36E1DDD48B100A29AC0 /* AuthenticateViewController.swift in Sources */,
 				10D0F3691DDD484600A29AC0 /* CustomCalloutView.swift in Sources */,
+				1098DEE41DDF9C9A00AAF9C6 /* APIConstants.swift in Sources */,
 				10D0F31D1DDD425F00A29AC0 /* AppDelegate.swift in Sources */,
 				10D0F3571DDD46F600A29AC0 /* CharityModel.swift in Sources */,
 				10BC4CF61DDD524A00E6F2BD /* BackgroundVideo.swift in Sources */,
