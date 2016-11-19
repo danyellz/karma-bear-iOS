@@ -12,13 +12,14 @@ import Foundation
 
 var tableView: UITableView!
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
   @IBOutlet weak var tableView: CharityLocTableView!
   @IBOutlet weak var charityCellImageView: UIImageView!
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var searchField: UITextField!
   @IBOutlet weak var userNavBtn: UIButton!
+    @IBOutlet weak var searchBtn: UIButton!
     
   var httpHelper = HTTPHelper()
   var LocArr: NSMutableArray = NSMutableArray()
@@ -26,6 +27,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
   var passImageUrl: String!
   var descString: String!
   var charitySearchCount = 0
+  var searchBar = UISearchBar()
+  var searchBarButtonItem: UIBarButtonItem?
     
   let cllocationManager: CLLocationManager = CLLocationManager()
 
@@ -48,6 +51,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     let userImg = UIImage(named: "UserIcon")
     userNavBtn.setImage(userImg, for: .normal)
     
+    searchBar.delegate = self
+    searchBar.searchBarStyle = UISearchBarStyle.minimal
+    searchBtn.addTarget(self, action: #selector(showSearchBar), for: UIControlEvents.touchUpInside)
+    
+    self.searchBarButtonItem = navigationItem.rightBarButtonItem
+    self.searchBarButtonItem?.title = "Search"
+    navigationItem.setLeftBarButton(searchBarButtonItem, animated: true)
+    
     checkForFBAuth()
     }
     
@@ -63,6 +74,39 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBAction func unwindToViewController (sender: UIStoryboardSegue){
         
+    }
+    
+    func showSearchBar() {
+        searchBar.alpha = 0
+        navigationItem.titleView = searchBar
+        UIView.animate(withDuration: 0.5, animations: {
+            self.searchBar.alpha = 1
+            self.searchBar.placeholder = "Search destination for charities..."
+            }, completion: {finished in
+                self.searchBar.becomeFirstResponder()
+        })
+    }
+    
+    func hideSearchBar() {
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            }, completion: {finished in
+                self.searchBar.resignFirstResponder()
+        })
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hideSearchBar()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("Cancel clicked")
+        searchBar.resignFirstResponder()
+        hideSearchBar()
     }
     
     func checkForFBAuth() {
