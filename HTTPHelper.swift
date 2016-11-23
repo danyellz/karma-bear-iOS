@@ -18,19 +18,15 @@ enum HTTPRequestContentType {
     case HTTPJsonContent
     case HTTPMultipartContent
 }
+
 struct HTTPHelper {
     static let BASE_URL = FBConstants.BASE_URL
     
-    func buildRequest(path: String!, method: String,
-                      requestContentType: HTTPRequestContentType = HTTPRequestContentType.HTTPJsonContent, requestBoundary:String = "") -> NSMutableURLRequest {
+    func buildRequest(path: String!, method: String, requestContentType: HTTPRequestContentType = HTTPRequestContentType.HTTPJsonContent, requestBoundary:String = "") -> NSMutableURLRequest {
         // 1. Create the request URL from path
-        
         let requestURL = NSURL(string: "\(HTTPHelper.BASE_URL)/\(path as! String)")
-        print(requestURL)
         let request = NSMutableURLRequest(url: requestURL! as URL)
-        print(request)
-        
-        
+
         // Set HTTP request method and Content-Type
         request.httpMethod = method
         
@@ -62,9 +58,8 @@ struct HTTPHelper {
             }
             do
             {
-                print(data)
                 completion(data as NSData?, nil)
-                print(data!)
+                
             } catch let parserError as NSError{
                 print(parserError)
             }
@@ -89,12 +84,12 @@ struct HTTPHelper {
             }
             do
             {
-                let jsonData = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions()) as? NSArray
-                
                 guard error == nil else {
                     print(error)
                     return
                 }
+                
+                let jsonData = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions()) as? NSArray
                 
                 for coordinate in jsonData!{
                     
@@ -102,8 +97,8 @@ struct HTTPHelper {
                     let coordinatesToAppend = CLLocationCoordinate2D(latitude: (json!["lat"]! as? Double)!, longitude: (json!["lng"]! as? Double)!)
                     charityLocations.append(coordinatesToAppend)
                 }
-                
                 completion(charityLocations, nil)
+                
             } catch let parserError as NSError{
                 print(parserError)
             }

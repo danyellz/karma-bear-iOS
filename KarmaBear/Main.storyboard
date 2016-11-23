@@ -153,10 +153,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r1n-fl-RxM">
-                                                    <frame key="frameInset" minX="290" minY="25" width="21" height="30"/>
+                                                    <frame key="frameInset" minX="348" minY="25" width="21" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                    <color key="textColor" red="0.33333333333333331" green="0.10196078431372549" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -174,14 +174,6 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="fee-Zd-WuC">
                         <nil key="title"/>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ULb-SK-sp3">
-                            <rect key="frame" x="52" y="7" width="271" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="tintColor" red="0.33333333329999998" green="0.1019607843" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" image="Search-1">
-                                <color key="titleColor" red="0.33333333329999998" green="0.1019607843" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                        </button>
                         <barButtonItem key="rightBarButtonItem" image="UserIcon" style="plain" id="sXt-Ff-vYy">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Ym-y8-ZK8">
                                 <rect key="frame" x="329" y="7" width="30" height="30"/>
@@ -201,7 +193,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="xps-ja-pyL" id="wOR-bR-uxB"/>
-                        <outlet property="searchBtn" destination="ULb-SK-sp3" id="C6L-Hl-ntN"/>
                         <outlet property="tableView" destination="fSn-Ug-YLu" id="5E9-Fw-FoD"/>
                         <outlet property="userNavBtn" destination="7Ym-y8-ZK8" id="U5W-2D-9Iw"/>
                         <segue destination="j1u-Xv-Mln" kind="modal" identifier="charityDetail" id="lgk-d0-1O1"/>
@@ -557,7 +548,6 @@
     <resources>
         <image name="CharityDetailBackground" width="600" height="375"/>
         <image name="Launch" width="250" height="250"/>
-        <image name="Search-1" width="30" height="30"/>
         <image name="UserBackground" width="500" height="281"/>
         <image name="UserIcon" width="50" height="50"/>
     </resources>

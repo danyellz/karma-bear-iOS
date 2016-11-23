@@ -1,9 +1,9 @@
 //
 //  ViewController.swift
-//  Selfie
+//  KarmaBear
 //
-//  Created by Behera, Subhransu on 29/8/14.
-//  Copyright (c) 2014 subhb.org. All rights reserved.
+//  Created by TY on 11/16/16.
+//  Copyright © 2016 Ty Daniels. All rights reserved.
 //
 
 import UIKit
@@ -19,16 +19,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var searchField: UITextField!
   @IBOutlet weak var userNavBtn: UIButton!
-    @IBOutlet weak var searchBtn: UIButton!
+  @IBOutlet weak var searchBtn: UIButton!
     
-  var httpHelper = HTTPHelper()
   var LocArr: NSMutableArray = NSMutableArray()
   var charityId: Int!
   var passImageUrl: String!
   var descString: String!
   var charitySearchCount = 0
+  var sliderStepVal = 25.0
+    
+  var httpHelper = HTTPHelper()
   var searchBar = UISearchBar()
-  var searchBarButtonItem: UIBarButtonItem?
+  var searchBarButtonItem: UIBarButtonItem!
+  var logoImageView   : UIImageView!
+  var filterSlider = UISlider()
     
   let cllocationManager: CLLocationManager = CLLocationManager()
 
@@ -52,12 +56,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     userNavBtn.setImage(userImg, for: .normal)
     
     searchBar.delegate = self
-    searchBar.searchBarStyle = UISearchBarStyle.minimal
-    searchBtn.addTarget(self, action: #selector(showSearchBar), for: UIControlEvents.touchUpInside)
+    searchBar.searchBarStyle = UISearchBarStyle.prominent
+    filterSlider.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
+    self.view.addSubview(self.filterSlider)
     
-    self.searchBarButtonItem = navigationItem.rightBarButtonItem
-    self.searchBarButtonItem?.title = "Search"
-    navigationItem.setLeftBarButton(searchBarButtonItem, animated: true)
+    let button = UIButton(type: .custom) as UIButton
+    button.setImage(UIImage(named: "Search-1"), for: .normal)
+    button.addTarget(self, action: #selector(showSearchBar), for: UIControlEvents.touchUpInside)
+    button.frame = CGRect(x: 0, y: 0, width: 53, height: 31)
+    
+    let barButton = UIBarButtonItem(customView: button)
+    self.navigationItem.leftBarButtonItem = barButton
+    
+    let logoImage = UIImage(named: "KarmaBearTitle")!
+    logoImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: logoImage.size.width, height: logoImage.size.height))
+    logoImageView.image = logoImage
+    navigationItem.titleView = logoImageView
     
     checkForFBAuth()
     }
@@ -88,10 +102,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func hideSearchBar() {
-        UIView.animate(withDuration: 0.3, animations: {
-            
+        UIView.animate(withDuration: 0.5, animations: {
+            self.navigationItem.titleView = self.logoImageView
             }, completion: {finished in
                 self.searchBar.resignFirstResponder()
+                self.searchDBForLocation(search: self.searchBar.text!)
+                self.getUserData()
         })
     }
     
@@ -221,7 +237,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func searchDBForLocation(search: String) {
         
         let httpRequest = httpHelper.buildRequest(path: RequestRoutes.CHARITIES_SEARCH, method: "POST")
-        httpRequest.httpBody = "{\"search\":\"\(search)\"}".data(using: String.Encoding.utf8)
+        httpRequest.httpBody = "{\"search\":\"\(search)\",\"distance\":\"\(1)\"}".data(using: String.Encoding.utf8)
+        
+        print(httpRequest)
         
         httpHelper.sendRequest(request: httpRequest, completion: {(data, error) in
             
@@ -233,7 +251,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             {
                 
                 let responseDict = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions()) as? NSArray
-                var charityLocations = [CharityStruct]()
                 
                 if !CharityModel.charityData.isEmpty{
                     CharityModel.charityData.removeAll()
@@ -241,12 +258,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 
                 for coordinate in responseDict!{
                     CharityModel.charityData.append(CharityStruct(dictionary: coordinate as! [String : AnyObject]))
-                    
-                    charityLocations.append(CharityStruct(dictionary: coordinate as! [String : AnyObject]))
                 }
                 
                 DispatchQueue.main.async {
-                    self.populateMapFromData(newCoordArr: charityLocations)
+                    self.populateMapFromData(newCoordArr: CharityModel.charityData)
                 }
                 
             } catch let error as NSError {
