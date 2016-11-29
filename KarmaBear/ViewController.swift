@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import Foundation
+import SnapKit
 
 var tableView: UITableView!
 
@@ -31,8 +32,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
   var httpHelper = HTTPHelper()
   var searchBar = UISearchBar()
   var searchBarButtonItem: UIBarButtonItem!
-  var logoImageView   : UIImageView!
+  var logoImageView : UIImageView!
   var filterSlider = UISlider()
+  let container = UIView()
     
   let cllocationManager: CLLocationManager = CLLocationManager()
 
@@ -73,7 +75,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     logoImageView.image = logoImage
     navigationItem.titleView = logoImageView
     
+    setupView()
     checkForFBAuth()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     override func viewDidLayoutSubviews() {
@@ -81,10 +89,28 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.tableView!.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-40, 0, 0, 0);
     }
     
-    override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-    }
+    //Mark: custom implementation of RPCircularProgress status
+    
+    lazy fileprivate var thinIndeterminate: RPCircularProgress = {
+        let progress = RPCircularProgress()
+        progress.thicknessRatio = 0.1
+        return progress
+    }()
+    
+    lazy fileprivate var thinProgress: RPCircularProgress = {
+        let progress = RPCircularProgress()
+        progress.thicknessRatio = 0.2
+        return progress
+    }()
+    
+    lazy fileprivate var thinFilledProgress: RPCircularProgress = {
+        let progress = RPCircularProgress()
+        progress.trackTintColor = UIColor.init(red: 74 / 255, green: 144 / 255, blue: 226 / 255, alpha: 0.3)
+        progress.progressTintColor = UIColor.init(red: 74 / 255, green: 144 / 255, blue: 226 / 255, alpha: 1)
+        progress.thicknessRatio = 0.5
+        return progress
+    }()
+    
     
     @IBAction func unwindToViewController (sender: UIStoryboardSegue){
         
@@ -101,7 +127,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         })
     }
     
+    
     func hideSearchBar() {
+        
         UIView.animate(withDuration: 0.5, animations: {
             self.navigationItem.titleView = self.logoImageView
             }, completion: {finished in
@@ -116,6 +144,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        print("Search bar is editing...")
         
     }
     
@@ -424,5 +453,64 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             static var sharedInstance = ViewController()
         }
         return Singleton.sharedInstance
+    }
+}
+
+private extension ViewController {
+    
+    func setupView() {
+        setupContainer()
+        setupThinProgress()
+        setupThinFilledProgress()
+    }
+    
+    func setupContainer() {
+        view.addSubview(container)
+        container.snp.makeConstraints { (make) in
+            make.center.equalTo(view)
+            make.width.equalTo(view).multipliedBy(1)
+            make.height.equalTo(view).multipliedBy(1)
+        }
+    }
+    
+    func setupThinProgress() {
+        constrain(thinProgress, topView: thinIndeterminate)
+        
+        //Setup initial progress wheel values
+        thinProgress.updateProgress(0.4, duration: 5)
+        thinProgress.enableIndeterminate()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+//            self.thinProgress.updateProgress(1, completion: {
+//                self.thinProgress.enableIndeterminate(false)
+//            })
+        }
+    }
+    
+    func setupThinFilledProgress() {
+        constrain(thinFilledProgress, leftView: thinProgress)
+        
+        thinFilledProgress.updateProgress(0.4, initialDelay: 0.4, duration: 3)
+    }
+    
+    func constrain(_ newView: UIView, topView: UIView? = nil) {
+        container.backgroundColor = UIColor.gray
+        container.layer.opacity = 0.95
+        container.addSubview(newView)
+        thinProgress.center = view.center
+    }
+    
+    func constrain(_ newView: UIView, leftView: UIView) {
+        container.addSubview(newView)
+        container.backgroundColor = UIColor.gray
+        container.layer.opacity = 0.95
+        container.addSubview(newView)
+    }
+    
+    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
 }

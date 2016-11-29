@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-KarmaBear.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-KarmaBearTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-KarmaBearUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>14A7C01DB8413BD63FF4233629A19396</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>25AC708D320DACBDC11B0F4F7795FF1F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>62F6107ECCB5FF05AF2CF914B563D0F2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D14976A7CE8C1F1104F42FECA4F3F53C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

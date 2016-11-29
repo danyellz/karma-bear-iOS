@@ -3,7 +3,7 @@ platform :ios, '9.0'
 
 target 'KarmaBear' do
   use_frameworks!
-  pod 'SnapKit', '~> 3.0.2'
+  pod 'SnapKit', '3.0.0' # Swift 3.0 support 
 
   target 'KarmaBearTests' do
     inherit! :search_paths

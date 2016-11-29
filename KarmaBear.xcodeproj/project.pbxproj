@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		101376AC1DECBEAE00FA96DE /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101376AB1DECBEAE00FA96DE /* RPCircularProgress.swift */; };
 		108DD8141DDD83EE00784F8F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108DD8131DDD83EE00784F8F /* MapKit.framework */; };
 		108DD8161DDD83FB00784F8F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108DD8151DDD83FB00784F8F /* CoreLocation.framework */; };
 		108DD8181DDD841500784F8F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 108DD8171DDD841500784F8F /* libsqlite3.0.tbd */; };
@@ -44,6 +45,9 @@
 		10D0F36B1DDD486300A29AC0 /* UserActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F36A1DDD486300A29AC0 /* UserActivityViewController.swift */; };
 		10D0F36E1DDD48B100A29AC0 /* AuthenticateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F36D1DDD48B100A29AC0 /* AuthenticateViewController.swift */; };
 		10D0F3701DDD48D100A29AC0 /* HTTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0F36F1DDD48D100A29AC0 /* HTTPHelper.swift */; };
+		6DBAFB2C9176CDF22C47F54E /* Pods_KarmaBearUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C691CCD20CEAE72FAD5A667F /* Pods_KarmaBearUITests.framework */; };
+		BBEB9B96DD53B01E8BF873E7 /* Pods_KarmaBearTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1094DE21926930F9C1F44F1B /* Pods_KarmaBearTests.framework */; };
+		F24430C01BB5B9C5B6E74F00 /* Pods_KarmaBear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6A639D100F1157392E5093 /* Pods_KarmaBear.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,9 +68,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		101376AB1DECBEAE00FA96DE /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RPCircularProgress.swift; path = "../../../Downloads/RPCircularProgress-master/Source/RPCircularProgress.swift"; sourceTree = "<group>"; };
 		108DD8131DDD83EE00784F8F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		108DD8151DDD83FB00784F8F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		108DD8171DDD841500784F8F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		1094DE21926930F9C1F44F1B /* Pods_KarmaBearTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KarmaBearTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1098DEE31DDF9C9A00AAF9C6 /* APIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		10BC4CDD1DDD501900E6F2BD /* KarmaBearTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KarmaBearTests-Bridging-Header.h"; path = "KarmaBearTests/KarmaBearTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		10BC4CE81DDD512A00E6F2BD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -105,6 +111,14 @@
 		10D0F36A1DDD486300A29AC0 /* UserActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActivityViewController.swift; sourceTree = "<group>"; };
 		10D0F36D1DDD48B100A29AC0 /* AuthenticateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticateViewController.swift; sourceTree = "<group>"; };
 		10D0F36F1DDD48D100A29AC0 /* HTTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHelper.swift; sourceTree = "<group>"; };
+		1ACEE355BFB75882C1E7384B /* Pods-KarmaBear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KarmaBear.release.xcconfig"; path = "Pods/Target Support Files/Pods-KarmaBear/Pods-KarmaBear.release.xcconfig"; sourceTree = "<group>"; };
+		28203F1A4E587C3765BD93D9 /* Pods-KarmaBearUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KarmaBearUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KarmaBearUITests/Pods-KarmaBearUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		43F520A54AAA5F1F069EBB9C /* Pods-KarmaBearTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KarmaBearTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KarmaBearTests/Pods-KarmaBearTests.release.xcconfig"; sourceTree = "<group>"; };
+		50F3EECC46B4004A1FA988F5 /* Pods-KarmaBearUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KarmaBearUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KarmaBearUITests/Pods-KarmaBearUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5A2E751993E473561C4B6B22 /* Pods-KarmaBearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KarmaBearTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KarmaBearTests/Pods-KarmaBearTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7F6A639D100F1157392E5093 /* Pods_KarmaBear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KarmaBear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		938FB9D056EE3DF66F150331 /* Pods-KarmaBear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KarmaBear.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KarmaBear/Pods-KarmaBear.debug.xcconfig"; sourceTree = "<group>"; };
+		C691CCD20CEAE72FAD5A667F /* Pods_KarmaBearUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KarmaBearUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +134,7 @@
 				10BC4CF31DDD51BA00E6F2BD /* FBSDKLoginKit.framework in Frameworks */,
 				10BC4CEB1DDD513000E6F2BD /* Foundation.framework in Frameworks */,
 				10BC4CE91DDD512A00E6F2BD /* AVFoundation.framework in Frameworks */,
+				F24430C01BB5B9C5B6E74F00 /* Pods_KarmaBear.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +145,7 @@
 				10BC4CEE1DDD518400E6F2BD /* Bolts.framework in Frameworks */,
 				10BC4CF21DDD51BA00E6F2BD /* FBSDKCoreKit.framework in Frameworks */,
 				10BC4CF41DDD51BA00E6F2BD /* FBSDKLoginKit.framework in Frameworks */,
+				BBEB9B96DD53B01E8BF873E7 /* Pods_KarmaBearTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DBAFB2C9176CDF22C47F54E /* Pods_KarmaBearUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +179,9 @@
 				10BC4CEC1DDD518400E6F2BD /* Bolts.framework */,
 				10BC4CEA1DDD513000E6F2BD /* Foundation.framework */,
 				10BC4CE81DDD512A00E6F2BD /* AVFoundation.framework */,
+				7F6A639D100F1157392E5093 /* Pods_KarmaBear.framework */,
+				1094DE21926930F9C1F44F1B /* Pods_KarmaBearTests.framework */,
+				C691CCD20CEAE72FAD5A667F /* Pods_KarmaBearUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -179,6 +199,7 @@
 				10D0F3301DDD425F00A29AC0 /* KarmaBearTests */,
 				10D0F33B1DDD425F00A29AC0 /* KarmaBearUITests */,
 				10D0F31A1DDD425F00A29AC0 /* Products */,
+				BFC8A3F4845EAFFC87758650 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -252,6 +273,7 @@
 		10D0F35F1DDD47AB00A29AC0 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				101376AB1DECBEAE00FA96DE /* RPCircularProgress.swift */,
 				10BC4CF51DDD524A00E6F2BD /* BackgroundVideo.swift */,
 				10D0F3601DDD47C400A29AC0 /* CharityAnnotation.swift */,
 				10D0F3621DDD47DF00A29AC0 /* AnnotationView.swift */,
@@ -270,6 +292,19 @@
 			name = RequestHelpers;
 			sourceTree = "<group>";
 		};
+		BFC8A3F4845EAFFC87758650 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				938FB9D056EE3DF66F150331 /* Pods-KarmaBear.debug.xcconfig */,
+				1ACEE355BFB75882C1E7384B /* Pods-KarmaBear.release.xcconfig */,
+				5A2E751993E473561C4B6B22 /* Pods-KarmaBearTests.debug.xcconfig */,
+				43F520A54AAA5F1F069EBB9C /* Pods-KarmaBearTests.release.xcconfig */,
+				28203F1A4E587C3765BD93D9 /* Pods-KarmaBearUITests.debug.xcconfig */,
+				50F3EECC46B4004A1FA988F5 /* Pods-KarmaBearUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -277,9 +312,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10D0F3411DDD425F00A29AC0 /* Build configuration list for PBXNativeTarget "KarmaBear" */;
 			buildPhases = (
+				52C2A14A8811BC7DFEB1AF64 /* [CP] Check Pods Manifest.lock */,
 				10D0F3151DDD425F00A29AC0 /* Sources */,
 				10D0F3161DDD425F00A29AC0 /* Frameworks */,
 				10D0F3171DDD425F00A29AC0 /* Resources */,
+				FB716A84CFFFA47B9664C519 /* [CP] Embed Pods Frameworks */,
+				A1D9E750B17F01AF2D7EBD3C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -294,9 +332,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10D0F3441DDD425F00A29AC0 /* Build configuration list for PBXNativeTarget "KarmaBearTests" */;
 			buildPhases = (
+				E6541CE50B43843944255884 /* [CP] Check Pods Manifest.lock */,
 				10D0F3291DDD425F00A29AC0 /* Sources */,
 				10D0F32A1DDD425F00A29AC0 /* Frameworks */,
 				10D0F32B1DDD425F00A29AC0 /* Resources */,
+				3E00BF60B8ED41BF807F234D /* [CP] Embed Pods Frameworks */,
+				75F6253AA5939E047A271406 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -312,9 +353,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10D0F3471DDD425F00A29AC0 /* Build configuration list for PBXNativeTarget "KarmaBearUITests" */;
 			buildPhases = (
+				F28DE87AD7B2A2E94D664098 /* [CP] Check Pods Manifest.lock */,
 				10D0F3341DDD425F00A29AC0 /* Sources */,
 				10D0F3351DDD425F00A29AC0 /* Frameworks */,
 				10D0F3361DDD425F00A29AC0 /* Resources */,
+				1BF58A32E40635312F8E7342 /* [CP] Embed Pods Frameworks */,
+				A1BC6DB03987C39383819959 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -409,6 +453,144 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1BF58A32E40635312F8E7342 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KarmaBearUITests/Pods-KarmaBearUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3E00BF60B8ED41BF807F234D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KarmaBearTests/Pods-KarmaBearTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		52C2A14A8811BC7DFEB1AF64 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		75F6253AA5939E047A271406 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KarmaBearTests/Pods-KarmaBearTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1BC6DB03987C39383819959 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KarmaBearUITests/Pods-KarmaBearUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1D9E750B17F01AF2D7EBD3C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KarmaBear/Pods-KarmaBear-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6541CE50B43843944255884 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F28DE87AD7B2A2E94D664098 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FB716A84CFFFA47B9664C519 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KarmaBear/Pods-KarmaBear-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		10D0F3151DDD425F00A29AC0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -417,6 +599,7 @@
 				10D0F35C1DDD475700A29AC0 /* NeedModalViewController.swift in Sources */,
 				10D0F31F1DDD425F00A29AC0 /* ViewController.swift in Sources */,
 				10D0F3701DDD48D100A29AC0 /* HTTPHelper.swift in Sources */,
+				101376AC1DECBEAE00FA96DE /* RPCircularProgress.swift in Sources */,
 				10D0F36E1DDD48B100A29AC0 /* AuthenticateViewController.swift in Sources */,
 				10D0F3691DDD484600A29AC0 /* CustomCalloutView.swift in Sources */,
 				1098DEE41DDF9C9A00AAF9C6 /* APIConstants.swift in Sources */,
@@ -573,6 +756,7 @@
 		};
 		10D0F3421DDD425F00A29AC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 938FB9D056EE3DF66F150331 /* Pods-KarmaBear.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = KarmaBear/KarmaBear.entitlements;
@@ -592,6 +776,7 @@
 		};
 		10D0F3431DDD425F00A29AC0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1ACEE355BFB75882C1E7384B /* Pods-KarmaBear.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = KarmaBear/KarmaBear.entitlements;
@@ -611,6 +796,7 @@
 		};
 		10D0F3451DDD425F00A29AC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A2E751993E473561C4B6B22 /* Pods-KarmaBearTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -633,6 +819,7 @@
 		};
 		10D0F3461DDD425F00A29AC0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43F520A54AAA5F1F069EBB9C /* Pods-KarmaBearTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -654,6 +841,7 @@
 		};
 		10D0F3481DDD425F00A29AC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28203F1A4E587C3765BD93D9 /* Pods-KarmaBearUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 792PPDCQ8E;
@@ -668,6 +856,7 @@
 		};
 		10D0F3491DDD425F00A29AC0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50F3EECC46B4004A1FA988F5 /* Pods-KarmaBearUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 792PPDCQ8E;

@@ -1,0 +1,6 @@
+framework module Pods_KarmaBearUITests {
+  umbrella header "Pods-KarmaBearUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
